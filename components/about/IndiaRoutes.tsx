@@ -67,8 +67,6 @@ export function IndiaRoutes({ className }: { className?: string }) {
   const hq = P.Ahmedabad;
   const partners = stats.find((s) => s.id === "partners");
   const cities = stats.find((s) => s.id === "cities");
-  const fm = mid("Ahmedabad", "Mumbai");
-  const cb = P.Bengaluru;
 
   return (
     <PlayOnView className={className}>
@@ -93,7 +91,7 @@ export function IndiaRoutes({ className }: { className?: string }) {
 
           {/* seas + compass */}
           <g className="ar-dots" fontFamily="inherit" fontStyle="italic" fontWeight="600" fontSize="15" letterSpacing="3" style={{ fill: "var(--color-muted)" }} opacity="0.55">
-            <text x="28" y="470">ARABIAN SEA</text>
+            <text x="18" y="600">ARABIAN SEA</text>
             <text x="395" y="520">BAY OF BENGAL</text>
           </g>
           <g transform="translate(548 600)" className="ar-dots" opacity="0.7">
@@ -155,9 +153,12 @@ export function IndiaRoutes({ className }: { className?: string }) {
           ))}
 
           {/* HQ tag */}
-          <g transform={`translate(${hq.x - 14} ${hq.y - 26})`} className="ar-pin" style={{ animationDelay: "0.9s" }}>
-            <rect x="-34" y="-17" width="40" height="22" rx="11" fill="#ff5a00" />
-            <text x="-14" y="-2" textAnchor="middle" fontSize="12" fontWeight="900" fill="#fff" fontFamily="inherit">HQ</text>
+          <g transform={`translate(${hq.x} ${hq.y - 22})`}>
+            <g className="ar-pin" style={{ animationDelay: "0.9s" }}>
+              <rect x="-17" y="-20" width="34" height="20" rx="10" fill="#ff5a00" />
+              <path d="M-4 0L0 5L4 0Z" fill="#ff5a00" />
+              <text x="0" y="-6" textAnchor="middle" fontSize="11.5" fontWeight="900" fill="#fff" fontFamily="inherit">HQ</text>
+            </g>
           </g>
 
           {/* the car, upright, driving the main corridor */}
@@ -169,19 +170,19 @@ export function IndiaRoutes({ className }: { className?: string }) {
         </svg>
 
         {/* floating glass cards */}
-        <div className="ar-card pointer-events-none absolute z-10 hidden -translate-x-[108%] -translate-y-1/2 sm:block" style={{ left: pct(fm.x, W), top: pct(fm.y + 18, H), animationDelay: "2.2s" }}>
+        <div className="ar-card pointer-events-none absolute z-10 hidden -translate-x-[115%] -translate-y-1/2 sm:block" style={{ left: pct(P.Jaipur.x, W), top: pct(P.Jaipur.y - 40, H), animationDelay: "2.2s" }}>
           <div className="hs-float flex items-center gap-2.5 rounded-2xl border border-white/70 bg-card/90 px-3 py-2.5 shadow-card backdrop-blur-xl dark:border-white/10">
             <span className="grid size-8 place-items-center rounded-xl bg-brand-orange text-white"><Utensils className="size-4" /></span>
             <span className="leading-tight"><span className="block text-xs font-extrabold text-heading">Free meal unlocked</span><span className="text-[0.65rem] text-muted">Partner dhaba · NH 48</span></span>
           </div>
         </div>
-        <div className="ar-card pointer-events-none absolute z-10 hidden -translate-x-1/2 sm:block" style={{ left: pct(cb.x + 40, W), top: pct(cb.y + 34, H), animationDelay: "3s" }}>
+        <div className="ar-card pointer-events-none absolute z-10 hidden sm:block" style={{ left: pct(P.Chennai.x + 14, W), top: pct(P.Chennai.y + 26, H), animationDelay: "3s" }}>
           <div className="hs-float flex items-center gap-2.5 rounded-2xl border border-white/70 bg-card/90 px-3 py-2.5 shadow-card backdrop-blur-xl dark:border-white/10" style={{ animationDelay: "-2s" }}>
             <span className="grid size-8 place-items-center rounded-xl bg-emerald-500 text-white"><BadgeIndianRupee className="size-4" /></span>
             <span className="leading-tight"><span className="block text-xs font-extrabold text-heading">Cashback credited</span><span className="text-[0.65rem] text-muted">Bill verified</span></span>
           </div>
         </div>
-        <div className="ar-card pointer-events-none absolute right-0 top-[6%] z-10" style={{ animationDelay: "1.6s" }}>
+        <div className="ar-card pointer-events-none absolute right-0 top-[6%] z-10 hidden sm:block" style={{ animationDelay: "1.6s" }}>
           <div className="rounded-2xl border border-white/70 bg-card/90 p-3 shadow-card backdrop-blur-xl dark:border-white/10">
             <p className="text-[0.6rem] font-extrabold uppercase tracking-widest text-muted">On the map</p>
             <div className="mt-1.5 space-y-1 text-xs font-bold text-heading">
