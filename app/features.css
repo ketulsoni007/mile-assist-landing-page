@@ -162,5 +162,16 @@
 .fm[data-play] .ar-route, .fm[data-play] .ar-pin, .fm[data-play] .ar-dots { animation-play-state: running; }
 .ar-pulse { transform-box: fill-box; transform-origin: center; animation: ar-pulse 2.6s ease-out infinite; }
 @keyframes ar-pulse { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(2.6); opacity: 0; } }
-.ar-car   { offset-rotate: 0deg; animation: ar-car 12s 2.5s ease-in-out infinite both; }
-@keyframes ar-car { 0% { offset-distance: 0%; opacity: 0; } 4% { opacity: 1; } 92% { opacity: 1; } 100% { offset-distance: 100%; opacity: 0; } }
+
+/* about map v2 */
+.fm .ar-stop { opacity: 0; transform-box: fill-box; transform-origin: 50% 100%; animation: fh-pin 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; animation-play-state: paused; }
+.fm .ar-card { opacity: 0; animation: fm-in 0.6s ease-out forwards; animation-play-state: paused; }
+.fm[data-play] .ar-stop, .fm[data-play] .ar-card { animation-play-state: running; }
+.ar-radar { transform-box: fill-box; transform-origin: center; animation: ar-radar 3s ease-out infinite; }
+.ar-trip  { offset-rotate: 0deg; opacity: 0; animation-name: ar-trip; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
+.ar-flow  { animation: ar-flow 3s linear infinite; }
+.ar-car   { offset-rotate: 0deg; animation: ar-car 16s 2.4s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite both; }
+@keyframes ar-radar { 0% { transform: scale(1); opacity: 0.9; } 100% { transform: scale(4.5); opacity: 0; } }
+@keyframes ar-trip  { 0% { offset-distance: 0%; opacity: 0; } 10%, 85% { opacity: 1; } 100% { offset-distance: 100%; opacity: 0; } }
+@keyframes ar-flow  { to { stroke-dashoffset: -0.064; } }
+@keyframes ar-car   { 0% { offset-distance: 0%; opacity: 0; } 3% { opacity: 1; } 47% { offset-distance: 100%; opacity: 1; } 50% { offset-distance: 100%; opacity: 0; } 53% { offset-distance: 100%; opacity: 0; } 56% { opacity: 1; } 100% { offset-distance: 0%; opacity: 1; } }

@@ -55,7 +55,7 @@ function AboutHero() {
           </Reveal>
         </div>
         <Reveal delay={0.15} y={40}>
-          <div className="relative mx-auto w-full max-w-[30rem]">
+          <div className="relative mx-auto w-full max-w-[34rem]">
             <div className="absolute inset-[10%] -z-10 rounded-full bg-brand-orange/15 blur-3xl" aria-hidden="true" />
             <IndiaRoutes />
           </div>
