@@ -1,0 +1,209 @@
+/* Hero scene animations (components/svg/HeroScene.tsx) */
+
+/* entrance: plays once, outer element */
+.hs-pop   { animation: hs-pop 0.8s var(--d, 0s) cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.hs-rise  { animation: hs-rise 1.1s 0.25s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes hs-pop  { from { opacity: 0; transform: scale(0.3); } to { opacity: 1; transform: none; } }
+@keyframes hs-rise { from { opacity: 0; transform: translateY(70px) scale(0.97); } to { opacity: 1; transform: none; } }
+
+/* idle loops: inner element */
+.hs-float   { animation: hs-float var(--fr, 6s) var(--fd, 0s) ease-in-out infinite; }
+.hs-breathe { transform-origin: 50% 100%; animation: hs-breathe 4s ease-in-out infinite; }
+.hs-aura    { background: radial-gradient(closest-side, var(--aura), transparent); animation: hs-aura 5s ease-in-out infinite; }
+.hs-twinkle { animation: hs-twinkle 3.2s var(--td, 0s) ease-in-out infinite; }
+.hs-shine   { animation: hs-shine 4.5s 1.5s ease-in-out infinite; }
+@keyframes hs-float   { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-3.2%) rotate(1.4deg); } }
+@keyframes hs-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.007) translateY(-0.4%); } }
+@keyframes hs-aura    { 0%, 100% { opacity: 0.7; transform: scale(1); } 50% { opacity: 1; transform: scale(1.06); } }
+@keyframes hs-twinkle { 0%, 100% { opacity: 0; transform: scale(0.3) rotate(0); } 50% { opacity: 1; transform: scale(1) rotate(45deg); } }
+@keyframes hs-shine   { 0% { transform: translateX(0) skewX(-12deg); opacity: 0; } 15% { opacity: 1; } 55%, 100% { transform: translateX(330px) skewX(-12deg); opacity: 0; } }
+
+/* pointer parallax: HeroVisual sets --px / --py (-1..1). Deeper layers move more. */
+.hs-layer { transition: transform 0.35s ease-out; }
+.hs-depth-1 { transform: translate(calc(var(--px, 0) * -16px), calc(var(--py, 0) * -10px)); }
+.hs-depth-2 { transform: translate(calc(var(--px, 0) * -10px), calc(var(--py, 0) * -7px)); }
+.hs-depth-3 { transform: translate(calc(var(--px, 0) * -6px), calc(var(--py, 0) * -4px)); }
+.hs-depth-4 { transform: translate(calc(var(--px, 0) * 8px), calc(var(--py, 0) * 4px)); }
+
+/* scenery (components/svg/HeroScenery.tsx) */
+.hs-fade       { animation: hs-fade 1.1s var(--d, 0s) ease-out both; }
+.hs-rise-soft  { animation: hs-rise-soft 1.1s var(--d, 0s) cubic-bezier(0.22, 1, 0.36, 1) both; }
+.hs-drift      { animation: hs-drift var(--dur, 30s) var(--dd, 0s) ease-in-out infinite alternate; }
+.hs-blob       { transform-box: fill-box; transform-origin: center; animation: hs-blob 9s ease-in-out infinite; }
+.hs-sway-slow  { transform-box: fill-box; transform-origin: 50% 100%; animation: hs-sway-slow 6s var(--sd, 0s) ease-in-out infinite alternate; }
+.hs-road-dash  { animation: hs-road-dash 2.4s linear infinite; }
+.hs-twinkle-win{ animation: hs-twinkle-win 3.6s var(--wd, 0s) ease-in-out infinite; }
+.hs-depth-0    { transform: translate(calc(var(--px, 0) * -4px), calc(var(--py, 0) * -3px)); transition: transform 0.35s ease-out; }
+@keyframes hs-fade       { from { opacity: 0; } to { opacity: 1; } }
+@keyframes hs-rise-soft  { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: none; } }
+@keyframes hs-drift      { from { transform: translateX(-28px); } to { transform: translateX(48px); } }
+@keyframes hs-blob       { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.025) translateY(-6px); } }
+@keyframes hs-sway-slow  { from { transform: rotate(-0.8deg); } to { transform: rotate(0.8deg); } }
+@keyframes hs-road-dash  { to { stroke-dashoffset: -88; } }
+@keyframes hs-twinkle-win{ 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
+
+/* app-phone mockup progress bar (HeroShowcase) */
+.hs-progress { width: 12%; animation: hs-progress 6s ease-in-out infinite; }
+@keyframes hs-progress { 0% { width: 12%; } 70%, 100% { width: 88%; } }
+
+/* Services section: paper plane following its dashed route */
+.svc-plane { offset-path: path("M10 100C60 90 80 30 140 50S230 20 285 12"); offset-rotate: auto; animation: svc-fly 9s ease-in-out infinite; }
+.svc-route { animation: hs-road-dash 3s linear infinite; }
+@keyframes svc-fly { 0% { offset-distance: 0%; opacity: 0; } 8% { opacity: 1; } 92% { opacity: 1; } 100% { offset-distance: 100%; opacity: 0; } }
+
+/* map in the phone mockup */
+.map-car { offset-path: path("M-10 160C40 150 60 110 100 100S160 60 210 30"); offset-rotate: 0deg; animation: map-drive 7s linear infinite; }
+.hs-pin { animation: hs-pin 3s var(--pd, 0s) ease-in-out infinite; }
+@keyframes map-drive { to { offset-distance: 100%; } }
+@keyframes hs-pin { 0%, 100% { transform: translate(-50%, -100%); } 50% { transform: translate(-50%, calc(-100% - 4px)); } }
+
+/* dotted world map pins (WorldDots) */
+.wd-pulse { transform-box: fill-box; transform-origin: center; animation: wd-pulse 2.6s var(--pd, 0s) ease-out infinite; }
+@keyframes wd-pulse { 0% { transform: scale(0.8); opacity: 0.7; } 100% { transform: scale(4.2); opacity: 0; } }
+
+/* How It Works */
+.hw-float { display: grid; animation: hw-float 4s var(--fd, 0s) ease-in-out infinite; }
+.hw-spark { animation: hw-spark 2.8s ease-in-out infinite; transform-box: fill-box; transform-origin: right center; }
+@keyframes hw-float { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-4px) rotate(-4deg); } }
+@keyframes hw-spark { 0%, 100% { opacity: 0.35; transform: scale(0.85); } 50% { opacity: 1; transform: scale(1); } }
+
+/* How It Works: finishing touches */
+.hw-ripple { animation: hw-ripple 1.6s ease-out 1 both; pointer-events: none; }
+.hw-spark-dot { opacity: 0; animation: hw-rise 9s ease-in-out infinite; }
+@keyframes hw-ripple { 0% { transform: scale(0.8); opacity: 0.8; } 100% { transform: scale(1.9); opacity: 0; } }
+@keyframes hw-rise { 0% { transform: translateY(24px) scale(0.6); opacity: 0; } 25% { opacity: 0.55; } 100% { transform: translateY(-90px) scale(1); opacity: 0; } }
+.hw-underline path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: hw-draw 1.1s 0.5s ease-out forwards; }
+@keyframes hw-draw { to { stroke-dashoffset: 0; } }
+
+/* How It Works: drive-through */
+.hw-drive { animation: hw-bump 0.5s ease-in-out infinite; }
+.hw-speed { animation: hw-speed 0.5s linear infinite; transform-origin: right center; }
+.hw-coin { animation: hw-coin 1.3s cubic-bezier(0.2, 0.8, 0.3, 1) both; transform: translate(-50%, -50%); }
+@keyframes hw-bump { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.5px); } }
+@keyframes hw-speed { 0% { opacity: 0; transform: scaleX(0.3); } 40% { opacity: 1; } 100% { opacity: 0; transform: scaleX(1) translateX(-10px); } }
+@keyframes hw-coin { 0% { opacity: 0; transform: translate(-50%, -50%) rotate(var(--a)) translateY(0) scale(0.4); } 25% { opacity: 1; } 100% { opacity: 0; transform: translate(-50%, -50%) rotate(var(--a)) translateY(-78px) scale(1); } }
+
+/* Hero v2: orbit ring around the phone */
+.hr-ring     { animation: hr-dash 40s linear infinite; }
+.hr-ring-rev { animation: hr-dash 60s linear infinite reverse; }
+.hr-orbit    { offset-rotate: 0deg; animation: hr-orbit 14s linear infinite; }
+@keyframes hr-dash  { to { stroke-dashoffset: -480; } }
+@keyframes hr-orbit { from { offset-distance: 0%; } to { offset-distance: 100%; } }
+
+/* Hero v2: phone map + UI (one shared 8s loop: route draws, arrow drives, pins pop, trip card slides up) */
+.pm-route { stroke-dasharray: 1; animation: pm-route 8s ease-in-out infinite; }
+.pm-nav   { offset-path: path("M96 312L96 204Q96 180 120 180L128 180Q152 180 152 156L152 92"); offset-rotate: auto; animation: pm-nav 8s ease-in-out infinite; }
+.pm-ping  { transform-box: fill-box; transform-origin: center; animation: pm-ping 1.6s ease-out infinite; }
+.pm-dest  { transform-box: fill-box; transform-origin: 50% 100%; animation: pm-dest 8s ease-in-out infinite; }
+.pm-pop   { transform-box: fill-box; transform-origin: center; animation: pm-pop 8s ease-out infinite; }
+.hs-bell  { transform-origin: 50% 10%; animation: hs-bell 5s ease-in-out infinite; }
+.hs-wave  { transform-origin: 70% 80%; animation: hs-wave 2.6s ease-in-out infinite; }
+.hs-tab   { animation: hs-tab 3s var(--td, 0s) ease-in-out infinite; }
+.hs-trip  { animation: hs-trip 8s ease-in-out infinite; }
+@keyframes pm-route { 0% { stroke-dashoffset: 1; opacity: 1; } 45%, 92% { stroke-dashoffset: 0; opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+@keyframes pm-nav   { 0% { offset-distance: 0%; opacity: 0; } 6% { opacity: 1; } 50% { offset-distance: 70%; } 85% { offset-distance: 92%; opacity: 1; } 96%, 100% { offset-distance: 92%; opacity: 0; } }
+@keyframes pm-ping  { 0% { transform: scale(0.7); opacity: 0.5; } 100% { transform: scale(1.7); opacity: 0; } }
+@keyframes pm-dest  { 0%, 30% { transform: translateY(-14px) scale(0.6); opacity: 0; } 38% { transform: translateY(2px) scale(1.05); opacity: 1; } 44%, 92% { transform: none; opacity: 1; } 100% { opacity: 0; } }
+@keyframes pm-pop   { 0%, 20% { transform: scale(0); opacity: 0; } 26% { transform: scale(1.25); opacity: 1; } 32%, 88% { transform: scale(1); opacity: 1; } 96%, 100% { transform: scale(0); opacity: 0; } }
+@keyframes hs-bell  { 0%, 84%, 100% { transform: rotate(0); } 87% { transform: rotate(16deg); } 90% { transform: rotate(-14deg); } 93% { transform: rotate(8deg); } 96% { transform: rotate(-4deg); } }
+@keyframes hs-wave  { 0%, 60%, 100% { transform: rotate(0); } 10% { transform: rotate(18deg); } 20% { transform: rotate(-10deg); } 30% { transform: rotate(14deg); } 40% { transform: rotate(-4deg); } }
+@keyframes hs-tab   { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+@keyframes hs-trip  { 0%, 40% { transform: translateY(130%); opacity: 0; } 50%, 92% { transform: none; opacity: 1; } 100% { transform: translateY(130%); opacity: 0; } }
+
+/* Testimonials */
+.ts-quote { animation: ts-quote 7s ease-in-out infinite; }
+@keyframes ts-quote { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-12px) rotate(-4deg); } }
+@keyframes ts-progress { from { width: 0%; } to { width: 100%; } }
+
+/* Store badges + Get the App banner */
+@keyframes sb-shine { from { left: -50%; } to { left: 130%; } }
+.ga-car   { offset-path: path("M-40 340C90 330 170 280 260 262S420 226 470 170S560 92 660 70"); offset-rotate: auto; animation: ga-car 7s cubic-bezier(0.45, 0.05, 0.4, 1) infinite; }
+.ga-dash  { animation: hs-road-dash 1.6s linear infinite; }
+.ga-pin   { animation: ga-pin 2.2s ease-in-out infinite; }
+.ga-cloud { animation: hs-drift 18s ease-in-out infinite alternate; }
+.ga-toast { animation: ga-toast 7s ease-in-out infinite; }
+.ga-glow  { animation: hs-aura 6s ease-in-out infinite; }
+@keyframes ga-car   { 0% { offset-distance: 0%; opacity: 0; } 6% { opacity: 1; } 82% { offset-distance: 84%; opacity: 1; } 92%, 100% { offset-distance: 84%; opacity: 0; } }
+@keyframes ga-pin   { 0%, 100% { transform: translate(560px, 40px); } 50% { transform: translate(560px, 30px); } }
+@keyframes ga-toast { 0%, 8% { opacity: 0; transform: translateY(14px) scale(0.92); } 16%, 52% { opacity: 1; transform: none; } 62%, 100% { opacity: 0; transform: translateY(-10px) scale(0.96); } }
+
+/* Get the App: street scene (AppStreetScene) — one 8s story loop for the car + coin */
+.as-car   { animation: as-car 8s cubic-bezier(0.45, 0, 0.35, 1) infinite; }
+.as-beam  { animation: hs-glow 1.4s ease-in-out infinite; }
+.as-coin  { opacity: 0; transform-box: fill-box; transform-origin: center bottom; animation: as-coin 8s ease-out infinite; }
+.as-pin   { animation: as-pin 2s ease-in-out infinite; }
+.as-spin  { transform-box: fill-box; transform-origin: center; animation: as-spin 24s linear infinite; }
+.as-win   { animation: as-win 3.2s ease-in-out infinite; }
+.as-neon  { animation: as-neon 5s steps(1) infinite; }
+.as-bulbs circle { animation: as-bulb 1.2s ease-in-out infinite; }
+.as-lamp  { transform-box: fill-box; transform-origin: center; animation: hs-aura 3s ease-in-out infinite; }
+.as-sway  { transform-box: fill-box; transform-origin: 50% 100%; animation: hs-sway-slow 5s ease-in-out infinite alternate; }
+.as-birds { animation: as-birds 16s linear infinite; }
+.as-flap  { transform-box: fill-box; transform-origin: center; animation: as-flap 0.6s ease-in-out infinite alternate; }
+.as-dash  { animation: as-dash 0.9s linear infinite; }
+@keyframes as-car   { 0% { transform: translateX(-140px); } 32% { transform: translateX(276px); } 60% { transform: translateX(276px); } 100% { transform: translateX(760px); } }
+@keyframes as-coin  { 0%, 34% { opacity: 0; transform: translateY(12px) scale(0.4); } 40% { opacity: 1; transform: translateY(-14px) scale(1.12); } 46%, 56% { opacity: 1; transform: translateY(-20px) scale(1); } 64%, 100% { opacity: 0; transform: translateY(-46px) scale(0.9); } }
+@keyframes as-pin   { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+@keyframes as-spin  { to { transform: rotate(360deg); } }
+@keyframes as-win   { 0%, 100% { opacity: 1; } 50% { opacity: 0.55; } }
+@keyframes as-neon  { 0%, 88%, 92%, 100% { opacity: 1; } 90%, 94% { opacity: 0.45; } }
+@keyframes as-bulb  { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+@keyframes as-birds { from { transform: translateX(-160px); } to { transform: translateX(760px); } }
+@keyframes as-flap  { from { transform: scaleY(1); } to { transform: scaleY(0.45); } }
+@keyframes as-dash  { to { stroke-dashoffset: -42; } }
+
+/* Pricing */
+@property --pr-a { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+.pr-border {
+  background: conic-gradient(from var(--pr-a), #ff5a00, #f2c14e, #ffd8a8, #2f6bff, #ff5a00);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: pr-spin 6s linear infinite;
+}
+.pr-sheen  { animation: pr-sheen 4.5s ease-in-out infinite; }
+.pr-medal  { animation: pr-medal 4s ease-in-out infinite; }
+.pr-coin   { animation: pr-coin 7s ease-in-out infinite; }
+.pr-gift   { animation: pr-gift 2.8s ease-in-out infinite; }
+.pr-flow   { animation: pr-flow 1.6s ease-in infinite; }
+.pr-ladder { animation: pr-ladder 5s ease-in-out infinite; }
+@keyframes pr-spin   { to { --pr-a: 360deg; } }
+@keyframes pr-sheen  { 0%, 55% { left: -40%; } 85%, 100% { left: 130%; } }
+@keyframes pr-medal  { 0%, 100% { transform: rotate(0) scale(1); } 10% { transform: rotate(-12deg) scale(1.08); } 20% { transform: rotate(8deg); } 30% { transform: rotate(0) scale(1); } }
+@keyframes pr-coin   { 0%, 100% { transform: translateY(0) rotateY(0); } 50% { transform: translateY(-18px) rotateY(180deg); } }
+@keyframes pr-gift   { 0%, 100% { transform: translateY(0) rotate(0); } 20% { transform: translateY(-5px) rotate(-8deg); } 40% { transform: translateY(0) rotate(6deg); } 60% { transform: rotate(0); } }
+@keyframes pr-flow   { from { transform: translateY(-100%); } to { transform: translateY(200%); } }
+@keyframes pr-ladder { 0% { width: 0; } 70%, 100% { width: 100%; } }
+
+/* FAQ */
+.fq-bubble { animation: fq-bob 5s ease-in-out infinite; }
+.fq-dots i { animation: as-bulb 1.2s ease-in-out infinite; }
+.fq-dots i:nth-child(2) { animation-delay: 0.2s; }
+.fq-dots i:nth-child(3) { animation-delay: 0.4s; }
+@keyframes fq-bob { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-10px) rotate(-4deg); } }
+
+
+/* Contact: support chat (SupportChat) — one 10s loop */
+.sc-msg    { opacity: 0; animation: sc-msg 10s var(--t, 0s) cubic-bezier(0.22, 1, 0.36, 1) infinite; }
+.sc-typing { opacity: 0; animation: sc-typing 10s 1.8s ease-in-out infinite; }
+.sc-typing i { animation: as-bulb 0.9s ease-in-out infinite; }
+.sc-typing i:nth-child(2) { animation-delay: 0.15s; }
+.sc-typing i:nth-child(3) { animation-delay: 0.3s; }
+.sc-pop    { opacity: 0; animation: sc-pop 10s var(--t, 0s) cubic-bezier(0.34, 1.56, 0.64, 1) infinite; }
+.sc-send   { animation: sc-send 10s ease-in-out infinite; }
+.sc-chip   { animation: sc-chip 6s ease-in-out infinite; }
+.sc-orbit  { animation: as-spin 40s linear infinite; }
+@keyframes sc-msg    { 0% { opacity: 0; transform: translateY(14px) scale(0.96); } 5%, 88% { opacity: 1; transform: none; } 94%, 100% { opacity: 0; transform: translateY(-6px); } }
+@keyframes sc-typing { 0% { opacity: 0; } 3%, 14% { opacity: 1; } 17%, 100% { opacity: 0; } }
+@keyframes sc-pop    { 0% { opacity: 0; transform: scale(0.6); } 5%, 70% { opacity: 1; transform: none; } 76%, 100% { opacity: 0; transform: scale(0.9); } }
+@keyframes sc-send   { 0%, 2%, 8%, 100% { transform: scale(1) rotate(0); } 4% { transform: scale(0.85) rotate(-14deg); } }
+@keyframes sc-chip   { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-10px) rotate(-6deg); } }
+
+/* Footer */
+.ft-car   { animation: ft-car 14s linear infinite; }
+.ft-dash  { animation: ft-dash 0.8s linear infinite; }
+.ft-heart { animation: ft-heart 1.4s ease-in-out infinite; }
+@keyframes ft-car   { from { left: -90px; } to { left: 100%; } }
+@keyframes ft-dash  { to { background-position: -44px 0; } }
+@keyframes ft-heart { 0%, 100% { transform: scale(1); } 15% { transform: scale(1.3); } 30% { transform: scale(1); } 45% { transform: scale(1.18); } }
