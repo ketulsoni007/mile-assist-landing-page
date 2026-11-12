@@ -1,8 +1,8 @@
 import { ArrowRight, Award, BadgeIndianRupee, Check, Crown, Gift, Medal, Sparkles } from "lucide-react";
-import CountUp from "@/components/react-bits/CountUp";
+import { BillingAmount, BillingNote, BillingProvider, BillingSwitch } from "@/components/pricing/Billing";
 import { Reveal } from "@/components/motion/Reveal";
 import { StoreBadges } from "@/components/ui/StoreBadges";
-import { plan, tiers, type Tier } from "@/lib/pricing";
+import { billing, inr, plan, tiers, type Tier } from "@/lib/pricing";
 
 const tierIcon = { bronze: Medal, silver: Award, gold: Crown } as const;
 
@@ -57,7 +57,6 @@ function TierCard({ tier, index }: { tier: Tier; index: number }) {
 }
 
 export function Pricing() {
-  const perDay = (plan.price / 30).toFixed(1);
   return (
     <section id="pricing" aria-labelledby="pricing-title" className="relative isolate overflow-hidden bg-gradient-to-b from-surface to-surface-alt py-24 sm:py-28">
       <div className="pointer-events-none absolute left-1/2 top-24 -z-10 size-[40rem] -translate-x-1/2 rounded-full bg-brand-orange/10 blur-3xl" aria-hidden="true" />
@@ -82,7 +81,7 @@ export function Pricing() {
             </h2>
           </Reveal>
           <Reveal delay={0.16}>
-            <p className="mt-4 text-lg text-body">One simple plan for every driver. Your first month is on us, and you earn bigger rewards as you level up.</p>
+            <p className="mt-4 text-lg text-body">One simple plan for every driver. Your first month is on us. Then pay monthly, or yearly and get 2 months free. You earn bigger rewards as you level up.</p>
           </Reveal>
         </div>
 
@@ -115,16 +114,16 @@ export function Pricing() {
                   <span className="pr-flow absolute inset-x-0 top-0 h-1/2 rounded-full bg-white" />
                 </div>
 
-                <p className="relative mt-2 flex items-end gap-1 leading-none">
-                  <span className="text-3xl font-extrabold">₹</span>
-                  <span className="text-7xl font-extrabold tabular-nums tracking-tight">
-                    <CountUp to={plan.price} from={0} duration={1.6} />
-                  </span>
-                  <span className="mb-2 text-lg font-bold text-white/85">/{plan.period}</span>
-                </p>
-                <p className="relative mt-2 text-sm font-semibold text-white/90">
-                  after your free month · that&apos;s about <span className="rounded-md bg-white/20 px-1.5 py-0.5">₹{perDay} a day</span>
-                </p>
+                <BillingProvider>
+                  <BillingSwitch tone="light" className="relative mt-3" />
+                  <p className="relative mt-4">
+                    <BillingAmount className="text-6xl font-extrabold tabular-nums tracking-tight sm:text-7xl" unitClassName="mb-2 text-lg font-bold text-white/85" />
+                  </p>
+                  <p className="relative mt-2 min-h-[2.5rem] text-sm font-semibold text-white/90">
+                    <BillingNote prefix="after your free month · " />
+                  </p>
+                </BillingProvider>
+                <p className="sr-only">₹{plan.price} per month, or ₹{inr(billing.yearly.price)} per year (save ₹{billing.yearlySaving}).</p>
 
                 <a href="#download" className="group relative mt-8 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-extrabold text-brand-orange shadow-[0_14px_30px_-12px_rgb(0_0_0/0.45)] transition hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
                   Start your free month <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />

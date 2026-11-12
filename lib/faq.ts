@@ -7,7 +7,7 @@ export type Faq = { q: string; a: string };
 export const faqs: Faq[] = [
   {
     q: "Is Miles Assist free to use?",
-    a: "Your first month is completely free once your KYC is verified. After that, the Miles Assist Driver Plan is just ₹163 per month and includes free food and stay at partner places, cashback on verified bills, roadside assistance, insurance support and 24/7 help.",
+    a: "Your first month is completely free once your KYC is verified. After that, the Miles Assist Driver Plan is just ₹163 per month, or ₹1,630 a year (12 months for the price of 10), and includes free food and stay at partner places, cashback on verified bills, roadside assistance, insurance support and 24/7 help.",
   },
   {
     q: "Is KYC verification mandatory?",

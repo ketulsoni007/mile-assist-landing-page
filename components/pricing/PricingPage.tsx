@@ -1,15 +1,16 @@
 import Link from "next/link";
 import { ArrowRight, BadgeIndianRupee, Building2, Check, ChevronRight, CircleHelp, Crown, Gavel, Gift, Headset, Hotel, Layers, Medal, Minus, Plus, Receipt, ShieldCheck, Sparkles, UserCheck, Utensils, Wrench, type LucideIcon } from "lucide-react";
-import CountUp from "@/components/react-bits/CountUp";
+import { BillingAmount, BillingNote, BillingProvider, BillingSwitch } from "@/components/pricing/Billing";
 import { Reveal } from "@/components/motion/Reveal";
 import { StoreBadges } from "@/components/ui/StoreBadges";
 import { PlayOnView } from "@/components/features/PlayOnView";
-import { plan, tiers, tierRows, pricingFaqs } from "@/lib/pricing";
+import { billing, inr, plan, tiers, tierRows, pricingFaqs } from "@/lib/pricing";
 import { jsonLdString, site } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
 const eyebrow = "inline-flex items-center gap-1.5 rounded-full bg-brand-orange-soft px-3 py-1 text-xs font-bold text-brand-orange ring-1 ring-brand-orange/15";
-const perDay = (plan.price / 30).toFixed(1);
+const perDay = inr(billing.monthly.perDay);
+const yearly = inr(billing.yearly.price);
 
 const pricingJsonLd = [
   {
@@ -18,7 +19,10 @@ const pricingJsonLd = [
     name: plan.name,
     brand: { "@type": "Brand", name: site.name },
     description: "Free food and free stay at partner restaurants and hotels, cashback on verified bills, roadside assistance, insurance support, a free first lawyer call and 24/7 support for drivers. First month free after KYC.",
-    offers: { "@type": "Offer", price: String(plan.price), priceCurrency: "INR", url: `${site.url}/pricing`, availability: "https://schema.org/InStock" },
+    offers: [
+      { "@type": "Offer", name: "Monthly", price: String(plan.price), priceCurrency: "INR", url: `${site.url}/pricing`, availability: "https://schema.org/InStock", priceSpecification: { "@type": "UnitPriceSpecification", price: plan.price, priceCurrency: "INR", unitCode: "MON", referenceQuantity: { "@type": "QuantitativeValue", value: 1, unitCode: "MON" } } },
+      { "@type": "Offer", name: "Yearly", price: String(plan.yearlyPrice), priceCurrency: "INR", url: `${site.url}/pricing`, availability: "https://schema.org/InStock", priceSpecification: { "@type": "UnitPriceSpecification", price: plan.yearlyPrice, priceCurrency: "INR", unitCode: "ANN", referenceQuantity: { "@type": "QuantitativeValue", value: 1, unitCode: "ANN" } } },
+    ],
   },
   { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: pricingFaqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) },
 ];
@@ -27,7 +31,7 @@ const includeIcons: LucideIcon[] = [Utensils, Hotel, BadgeIndianRupee, Wrench, S
 const tierIcon = { bronze: Medal, silver: Medal, gold: Crown } as const;
 
 /* ───────── hero receipt ───────── */
-function Receipt163() {
+function PlanReceipt() {
   const lines = [
     { t: "Free food at partners", v: "Included" },
     { t: "Free stay at partners", v: "Included" },
@@ -58,11 +62,14 @@ function Receipt163() {
           <span className="font-semibold text-muted">First month</span>
           <span className="pp-stamp rounded-md border-2 border-emerald-500 px-2 py-0.5 text-xs font-extrabold uppercase tracking-wider text-emerald-500">Free</span>
         </div>
-        <div className="mt-3 flex items-end justify-between">
-          <span className="text-sm font-semibold text-muted">Then, per month</span>
-          <span className="text-4xl font-extrabold tabular-nums text-heading">₹<CountUp to={plan.price} duration={1.8} /></span>
-        </div>
-        <p className="mt-1 text-right text-xs font-semibold text-brand-orange">≈ ₹{perDay} a day</p>
+        <BillingProvider>
+          <div className="mt-4 flex justify-center"><BillingSwitch /></div>
+          <div className="mt-4 flex items-end justify-between gap-3">
+            <span className="text-sm font-semibold text-muted">Then</span>
+            <BillingAmount className="text-4xl font-extrabold tabular-nums text-heading" unitClassName="mb-1 text-sm font-bold text-muted" />
+          </div>
+          <p className="mt-1 min-h-[2rem] text-right text-xs font-semibold text-brand-orange"><BillingNote /></p>
+        </BillingProvider>
       </div>
       <span className="pp-tag absolute -right-4 -top-4 rotate-12 rounded-2xl bg-gradient-to-br from-brand-orange to-[#ff8a3d] px-3.5 py-2 text-sm font-extrabold text-white shadow-glow">1 month free</span>
     </PlayOnView>
@@ -86,24 +93,24 @@ function PricingHero() {
           <Reveal delay={0.06}><span className={`${eyebrow} mt-6`}><Sparkles className="size-3.5" /> Simple pricing</span></Reveal>
           <Reveal delay={0.12}>
             <h1 id="pp-title" className="mt-5 text-[2.6rem] font-extrabold leading-[1.05] tracking-tight text-heading sm:text-6xl">
-              One plan. First month free. <span className="text-brand-orange">Then ₹{plan.price}/month.</span>
+              One plan. First month free. <span className="text-brand-orange">Then ₹{plan.price}/month.</span> <span className="block text-[0.55em] leading-tight text-heading">Or ₹{yearly}/year, 2 months free.</span>
             </h1>
           </Reveal>
           <Reveal delay={0.18}>
             <p className="mt-5 max-w-xl text-lg text-body">
-              Free food, free stay, cashback on every verified bill, roadside assistance and 24/7 support, for about ₹{perDay} a day. No separate plans to compare: you level up as you drive.
+              Free food, free stay, cashback on every verified bill, roadside assistance and 24/7 support, for about ₹{perDay} a day. Pay monthly, or pay ₹{yearly} for the whole year and save ₹{billing.yearlySaving}. Same plan either way: you level up as you drive.
             </p>
           </Reveal>
           <Reveal delay={0.24}>
             <div className="mt-8 grid max-w-lg grid-cols-3 divide-x divide-line rounded-2xl border border-line bg-card/70 py-4 text-center shadow-card backdrop-blur">
-              {[{ v: "₹0", l: "First month" }, { v: `₹${plan.price}`, l: "Per month after" }, { v: "1", l: "Simple plan" }].map((s) => (
+              {[{ v: "₹0", l: "First month" }, { v: `₹${plan.price}`, l: "Per month" }, { v: `₹${yearly}`, l: "Per year · 2 months free" }].map((s) => (
                 <div key={s.l} className="px-2"><p className="text-2xl font-extrabold text-brand-orange sm:text-3xl">{s.v}</p><p className="mt-0.5 text-xs font-semibold text-muted">{s.l}</p></div>
               ))}
             </div>
           </Reveal>
           <Reveal delay={0.3} className="mt-8"><StoreBadges size="sm" /></Reveal>
         </div>
-        <Reveal delay={0.15} y={40}><Receipt163 /></Reveal>
+        <Reveal delay={0.15} y={40}><PlanReceipt /></Reveal>
       </div>
     </section>
   );
@@ -115,7 +122,7 @@ function Timeline() {
     { Icon: UserCheck, t: "Sign up & KYC", s: "Day 0", c: "#2f6bff" },
     { Icon: Gift, t: "Free month starts", s: "KYC verified", c: "#16a34a" },
     { Icon: Sparkles, t: "Use every service", s: "30 days free", c: "#7c5cff" },
-    { Icon: BadgeIndianRupee, t: `₹${plan.price} / month`, s: "After the free month", c: "#ff5a00" },
+    { Icon: BadgeIndianRupee, t: `₹${plan.price}/month or ₹${yearly}/year`, s: "After the free month", c: "#ff5a00" },
   ];
   return (
     <section aria-labelledby="tl-title" className="bg-surface py-24">
@@ -152,7 +159,7 @@ function Included() {
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <Reveal><span className={eyebrow}><Check className="size-3.5" /> Included</span></Reveal>
-          <Reveal delay={0.08}><h2 id="inc-title" className="mt-5 text-4xl font-extrabold tracking-tight text-heading sm:text-5xl">Everything in your <span className="text-brand-orange">₹{plan.price} plan</span></h2></Reveal>
+          <Reveal delay={0.08}><h2 id="inc-title" className="mt-5 text-4xl font-extrabold tracking-tight text-heading sm:text-5xl">Everything in <span className="text-brand-orange">your plan</span></h2></Reveal>
         </div>
         <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {plan.includes.map((f, i) => {

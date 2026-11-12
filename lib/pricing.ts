@@ -1,4 +1,5 @@
-// Pricing copy. Source: Miles Assist App Update Report v0.1 (tiers) + owner confirmation (one plan, ₹163/month after a free month; tiers are earned).
+// Pricing copy. Monthly ₹163 or yearly ₹1,630 (10x monthly, i.e. 2 months free) — owner confirmed 2026-11-12.
+// Source: Miles Assist App Update Report v0.1 (tiers) + owner confirmation (one plan, ₹163/month after a free month; tiers are earned).
 // Before launch: confirm final tier names, the Gold cashback figure (owner says it is higher than Silver's), and how tiers are earned.
 
 export const plan = {
@@ -6,6 +7,7 @@ export const plan = {
   freeMonths: 1,
   price: 163, // ₹ per month, after the free month
   period: "month",
+  yearlyPrice: 1630, // ₹ per year: pay for 10 months, get 12
   includes: [
     "Free food at partner restaurants",
     "Free stay at partner hotels",
@@ -79,8 +81,18 @@ export const tierRows: { label: string; values: [boolean | string, boolean | str
 
 export const pricingFaqs = [
   { q: "Is the first month really free?", a: "Yes. Once your KYC is verified you get a 1 month free subscription with full access to Miles Assist services." },
-  { q: "How much does Miles Assist cost after the free month?", a: "The Miles Assist Driver Plan is ₹163 per month after your free month, which works out to about ₹5.4 a day." },
+  { q: "How much does Miles Assist cost after the free month?", a: "The Miles Assist Driver Plan is ₹163 per month after your free month, which works out to about ₹5.4 a day. You can also pay yearly." },
+  { q: "Is there a yearly plan?", a: "Yes. The yearly plan is ₹1,630 a year: you pay for 10 months and get 12, so you save ₹326 compared with paying monthly. That is about ₹136 a month or ₹4.5 a day." },
   { q: "Do I pay more for Silver or Gold?", a: "No. Every driver is on the same plan. Bronze, Silver and Gold are levels you move up through as you keep driving with Miles Assist, unlocking bigger cashback and more support." },
   { q: "Do hotels and restaurants pay to partner?", a: "Partners pay a 0% platform fee, and listing and the partner dashboard are free." },
   { q: "Where can I read the refund and cancellation terms?", a: "See our Refund Policy and Cancellation Policy pages, or contact support@milesassist.in." },
 ];
+
+export type Cycle = "monthly" | "yearly";
+export const billing = {
+  monthly: { price: plan.price, unit: "month", perDay: plan.price / 30, label: "Monthly" },
+  yearly: { price: plan.yearlyPrice, unit: "year", perDay: plan.yearlyPrice / 365, perMonth: plan.yearlyPrice / 12, label: "Yearly" },
+  yearlySaving: plan.price * 12 - plan.yearlyPrice, // ₹326
+  freeMonthsOnYearly: 12 - plan.yearlyPrice / plan.price, // 2
+};
+export const inr = (n: number) => n.toLocaleString("en-IN", { maximumFractionDigits: n < 100 ? 1 : 0 });

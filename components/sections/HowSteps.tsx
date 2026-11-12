@@ -12,11 +12,21 @@ const LOW = 340;
 const HIGH = 190;
 const STEP_X = [125, 375, 625, 875];
 const STEP_Y = [LOW, HIGH, LOW, HIGH];
-const ROAD = `M-30 ${LOW} L125 ${LOW} C250 ${LOW} 250 ${HIGH} 375 ${HIGH} C500 ${HIGH} 500 ${LOW} 625 ${LOW} C750 ${LOW} 750 ${HIGH} 875 ${HIGH} L1030 ${HIGH}`;
+/**
+ * The road drawn in real pixels of the stage (w x h), not a stretched viewBox. Stretching with
+ * preserveAspectRatio="none" made the lit trail (measured on screen) and the car (measured in viewBox units)
+ * disagree by an amount that changed with the screen's aspect ratio, so the trail lagged on some screens.
+ */
+function buildRoad(w: number, h: number) {
+  const X = (x: number) => +((x / VB_W) * w).toFixed(2);
+  const Y = (y: number) => +((y / VB_H) * h).toFixed(2);
+  const lo = Y(LOW), hi = Y(HIGH);
+  return `M${X(-30)} ${lo} L${X(125)} ${lo} C${X(250)} ${lo} ${X(250)} ${hi} ${X(375)} ${hi} C${X(500)} ${hi} ${X(500)} ${lo} ${X(625)} ${lo} C${X(750)} ${lo} ${X(750)} ${hi} ${X(875)} ${hi} L${X(1030)} ${hi}`;
+}
 
 /** scroll progress (0..1) at which the car has parked at each step */
 const ARRIVE = [0.08, 0.36, 0.64, 0.92];
-const PARK_GAP = 80; // the car stops this far (viewBox units) before the badge so it never hides the icon
+const PARK_GAP = 0.08; // the car stops this fraction of the stage width before the badge so it never hides the icon
 
 function Badge({ step, progress, threshold }: { step: Step; progress: MotionValue<number>; threshold: number }) {
   const lit = useTransform(progress, [threshold - 0.05, threshold], [0, 1]);
@@ -97,6 +107,8 @@ export function HowSteps() {
   const stage = useRef<HTMLDivElement>(null);
   const roadPath = useRef<SVGPathElement>(null);
   const carEl = useRef<HTMLDivElement>(null);
+  const trailEl = useRef<SVGPathElement>(null);
+  const [size, setSize] = useState({ w: VB_W, h: VB_H });
   const geo = useRef<{ total: number; stops: number[] }>({ total: 1, stops: [0, 0, 0, 0] });
   const reduce = useReducedMotion();
 
@@ -106,22 +118,16 @@ export function HowSteps() {
   const progress = reduce ? done : deskScroll;
   const mobile = reduce ? done : mobScroll;
 
-  /* measure the road once: where each badge sits along it, and the total length */
+  /* track the stage's pixel size; the road is redrawn for it */
   useEffect(() => {
-    const path = roadPath.current;
-    if (!path) return;
-    const total = path.getTotalLength();
-    const stops = STEP_X.map((x) => {
-      let lo = 0, hi = total;
-      for (let i = 0; i < 24; i++) {
-        const mid = (lo + hi) / 2;
-        if (path.getPointAtLength(mid).x < x) lo = mid; else hi = mid;
-      }
-      return Math.max(0, lo - PARK_GAP);
+    const box = stage.current;
+    if (!box) return;
+    const ro = new ResizeObserver(() => {
+      const w = box.clientWidth, h = box.clientHeight;
+      if (w && h) setSize((s) => (s.w === w && s.h === h ? s : { w, h }));
     });
-    geo.current = { total, stops };
-    place(progress.get());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    ro.observe(box);
+    return () => ro.disconnect();
   }, []);
 
   const lengthAt = useCallback((p: number) => {
@@ -129,28 +135,45 @@ export function HowSteps() {
     return keyframes(p, [0, ...ARRIVE, 1], [0, s[0], s[1], s[2], s[3], s[3]]);
   }, []);
 
-  /** put the car on the road at progress p, rotated along the road, in % of the stage */
+  /** put the car on the road at progress p and light the trail up to exactly the same point (both in pixels) */
   const place = useCallback((p: number) => {
-    const path = roadPath.current, car = carEl.current, box = stage.current;
-    if (!path || !car || !box) return;
+    const path = roadPath.current, car = carEl.current, trail = trailEl.current;
+    if (!path || !car) return;
+    const { total } = geo.current;
     const len = lengthAt(p);
     const a = path.getPointAtLength(len);
-    const b = path.getPointAtLength(Math.min(len + 2, geo.current.total));
-    const w = box.clientWidth, h = box.clientHeight;
-    const ang = (Math.atan2(((b.y - a.y) / VB_H) * h, ((b.x - a.x) / VB_W) * w) * 180) / Math.PI;
-    car.style.left = `${(a.x / VB_W) * 100}%`;
-    car.style.top = `${(a.y / VB_H) * 100}%`;
+    const b = path.getPointAtLength(Math.min(len + 2, total));
+    const ang = (Math.atan2(b.y - a.y, b.x - a.x) * 180) / Math.PI;
+    car.style.left = `${a.x}px`;
+    car.style.top = `${a.y}px`;
     car.style.transform = `translate(-50%, -66%) rotate(${ang}deg)`;
+    if (trail) {
+      trail.style.strokeDasharray = `${len} ${total + 10}`;
+      trail.style.opacity = len > 0.5 ? "1" : "0";
+    }
   }, [lengthAt]);
 
-  useMotionValueEvent(progress, "change", place);
+  /* re-measure whenever the road is redrawn: total length and where each badge sits along it */
   useEffect(() => {
-    const ro = new ResizeObserver(() => place(progress.get()));
-    if (stage.current) ro.observe(stage.current);
-    return () => ro.disconnect();
-  }, [place, progress]);
+    const path = roadPath.current;
+    if (!path) return;
+    const total = path.getTotalLength();
+    const gap = PARK_GAP * size.w;
+    const stops = STEP_X.map((x) => {
+      const target = (x / VB_W) * size.w;
+      let lo = 0, hi = total;
+      for (let i = 0; i < 24; i++) {
+        const mid = (lo + hi) / 2;
+        if (path.getPointAtLength(mid).x < target) lo = mid; else hi = mid;
+      }
+      return Math.max(0, lo - gap);
+    });
+    geo.current = { total, stops };
+    place(progress.get());
+  }, [size, place, progress]);
 
-  const trail = useTransform(progress, (p) => Math.min(1, (lengthAt(p) + 0) / geo.current.total));
+  useMotionValueEvent(progress, "change", place);
+  const road = buildRoad(size.w, size.h);
   const railScale = useTransform(mobile, [0, 1], [0, 1]);
 
   return (
@@ -164,14 +187,14 @@ export function HowSteps() {
 
         {/* ===== desktop: pinned road ===== */}
         <div ref={stage} className="relative mx-auto hidden h-[min(540px,calc(100vh-8rem))] w-full max-w-6xl lg:block">
-          <svg viewBox={`0 0 ${VB_W} ${VB_H}`} preserveAspectRatio="none" className="absolute inset-0 size-full overflow-visible" aria-hidden="true">
+          <svg viewBox={`0 0 ${size.w} ${size.h}`} className="absolute inset-0 size-full overflow-visible" aria-hidden="true">
             {/* tarmac */}
-            <path d={ROAD} fill="none" strokeWidth="44" strokeLinecap="round" vectorEffect="non-scaling-stroke" style={{ stroke: "var(--color-line)" }} />
-            <path d={ROAD} fill="none" strokeWidth="38" strokeLinecap="round" vectorEffect="non-scaling-stroke" style={{ stroke: "var(--color-surface-alt)" }} />
+            <path d={road} fill="none" strokeWidth="44" strokeLinecap="round" style={{ stroke: "var(--color-line)" }} />
+            <path d={road} fill="none" strokeWidth="38" strokeLinecap="round" style={{ stroke: "var(--color-surface-alt)" }} />
             {/* lane dashes */}
-            <path ref={roadPath} d={ROAD} fill="none" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="10 12" vectorEffect="non-scaling-stroke" style={{ stroke: "var(--color-muted)", opacity: 0.45 }} />
+            <path ref={roadPath} d={road} fill="none" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="10 12" style={{ stroke: "var(--color-muted)", opacity: 0.45 }} />
             {/* driven part lights up */}
-            <motion.path d={ROAD} fill="none" strokeWidth="5" strokeLinecap="round" vectorEffect="non-scaling-stroke" stroke="#ff5a00" style={{ pathLength: trail, filter: "drop-shadow(0 0 6px rgb(255 90 0 / 0.6))" }} />
+            <path ref={trailEl} d={road} fill="none" strokeWidth="5" strokeLinecap="round" stroke="#ff5a00" style={{ strokeDasharray: "0 99999", opacity: 0, filter: "drop-shadow(0 0 6px rgb(255 90 0 / 0.6))" }} />
           </svg>
 
           {steps.map((s, i) => {
