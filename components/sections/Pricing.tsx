@@ -17,7 +17,7 @@ function TierCard({ tier, index }: { tier: Tier; index: number }) {
         style={{ ["--glow" as string]: tier.colors.glow }}
       >
         {/* animated metallic border on Gold */}
-        {gold && <span className="pr-border pointer-events-none absolute inset-0 rounded-3xl p-[2px]" aria-hidden="true" />}
+        {gold && <span className="pr-border pointer-events-none absolute inset-0 rounded-3xl p-[0.125rem]" aria-hidden="true" />}
         <span className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100" style={{ boxShadow: `0 30px 60px -28px ${tier.colors.glow}` }} aria-hidden="true" />
 
         {/* metal header plate with a light sweep */}
@@ -33,7 +33,7 @@ function TierCard({ tier, index }: { tier: Tier; index: number }) {
                 <span className="block text-xs font-semibold opacity-85">{tier.tagline}</span>
               </span>
             </span>
-            {gold && <span className="rounded-full bg-white/25 px-2.5 py-1 text-[11px] font-extrabold uppercase tracking-wide ring-1 ring-white/40">Top tier</span>}
+            {gold && <span className="rounded-full bg-white/25 px-2.5 py-1 text-[0.6875rem] font-extrabold uppercase tracking-wide ring-1 ring-white/40">Top tier</span>}
           </div>
           <p className="relative mt-5 flex items-center gap-2 text-2xl font-extrabold">
             <BadgeIndianRupee className="size-6 opacity-90" /> {tier.cashback}
@@ -89,7 +89,7 @@ export function Pricing() {
         {/* ===== main plan card ===== */}
         <Reveal delay={0.1} y={40}>
           <div className="relative mx-auto mt-14 max-w-5xl">
-            <span className="pr-border pointer-events-none absolute -inset-[3px] rounded-[calc(2rem+3px)] p-[3px]" aria-hidden="true" />
+            <span className="pr-border pointer-events-none absolute -inset-[0.1875rem] rounded-[calc(2rem+3px)] p-[0.1875rem]" aria-hidden="true" />
             <div className="relative grid overflow-hidden rounded-[2rem] bg-card shadow-[0_40px_90px_-40px_rgb(255_90_0/0.45)] md:grid-cols-[1fr_1.15fr]">
               {/* price side */}
               <div className="relative overflow-hidden bg-gradient-to-br from-[#ff7a1f] via-brand-orange to-[#e84c00] p-8 text-white sm:p-10">

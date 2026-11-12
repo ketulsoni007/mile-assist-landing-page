@@ -5,12 +5,12 @@ import type { FeatureId } from "@/lib/features";
 /* ───────── phone shell ───────── */
 export function PhoneShell({ children, title, tint = "#ff5a00" }: { children: React.ReactNode; title: string; tint?: string }) {
   return (
-    <div className="relative mx-auto w-[290px]">
+    <div className="relative mx-auto w-[18.125rem]">
       <div className="absolute -inset-10 -z-10 rounded-full opacity-40 blur-3xl" style={{ background: tint }} />
-      <div className="relative h-[590px] rounded-[2.6rem] border-[7px] border-[#0b1330] bg-card shadow-[0_40px_80px_-30px_rgb(8_30_76/0.6)] ring-1 ring-white/20">
+      <div className="relative h-[36.875rem] rounded-[2.6rem] border-[7px] border-[#0b1330] bg-card shadow-[0_40px_80px_-30px_rgb(8_30_76/0.6)] ring-1 ring-white/20">
         <span className="absolute left-1/2 top-2 z-20 h-5 w-24 -translate-x-1/2 rounded-full bg-[#0b1330]" />
         <div className="flex h-full flex-col overflow-hidden rounded-[2.1rem]">
-          <div className="flex items-center justify-between px-6 pt-3 text-[11px] font-bold text-muted">
+          <div className="flex items-center justify-between px-6 pt-3 text-[0.6875rem] font-bold text-muted">
             <span>9:41</span>
             <span className="flex items-center gap-1"><Signal className="size-3" /><Wifi className="size-3" /><BatteryFull className="size-3.5" /></span>
           </div>
@@ -24,7 +24,7 @@ export function PhoneShell({ children, title, tint = "#ff5a00" }: { children: Re
   );
 }
 
-const freeTag = <span className="rounded-full bg-emerald-500/15 px-2 py-0.5 text-[10px] font-extrabold text-emerald-600 dark:text-emerald-400">FREE</span>;
+const freeTag = <span className="rounded-full bg-emerald-500/15 px-2 py-0.5 text-[0.625rem] font-extrabold text-emerald-600 dark:text-emerald-400">FREE</span>;
 
 /* ───────── 1. route search ───────── */
 function RouteSearch() {
@@ -43,7 +43,7 @@ function RouteSearch() {
           <div key={f.label} className="flex items-center gap-2.5 rounded-xl bg-card px-3 py-2.5 ring-1 ring-line">
             <span className="size-2.5 rounded-full" style={{ background: f.c }} />
             <span className="leading-tight">
-              <span className="block text-[10px] font-semibold uppercase text-muted">{f.label}</span>
+              <span className="block text-[0.625rem] font-semibold uppercase text-muted">{f.label}</span>
               <span className={`block overflow-hidden whitespace-nowrap text-sm font-bold text-heading ${f.cls}`}>{f.value}</span>
             </span>
           </div>
@@ -62,7 +62,7 @@ function RouteSearch() {
             <span className="grid size-10 place-items-center rounded-xl text-white" style={{ background: c }}><Icon className="size-5" /></span>
             <span className="min-w-0 flex-1 leading-tight">
               <span className="block truncate text-sm font-bold text-heading">{name}</span>
-              <span className="text-[11px] text-muted">{km} · on route</span>
+              <span className="text-[0.6875rem] text-muted">{km} · on route</span>
             </span>
             {freeTag}
           </li>
@@ -82,7 +82,7 @@ function NearbyMap() {
         <span className="fm-tabA flex-1 rounded-full py-2 text-center text-xs font-extrabold">🍽 Explore Food</span>
         <span className="fm-tabB flex-1 rounded-full py-2 text-center text-xs font-extrabold">🛏 Explore Stay</span>
       </div>
-      <div className="relative h-[330px] overflow-hidden rounded-2xl ring-1 ring-line" style={{ background: "var(--map-bg)" }}>
+      <div className="relative h-[20.625rem] overflow-hidden rounded-2xl ring-1 ring-line" style={{ background: "var(--map-bg)" }}>
         <svg viewBox="0 0 240 280" className="absolute inset-0 size-full" preserveAspectRatio="xMidYMid slice">
           <g style={{ fill: "var(--map-block-2)" }}>
             <rect x="10" y="10" width="60" height="50" rx="6" /><rect x="90" y="10" width="50" height="50" rx="6" /><rect x="160" y="10" width="70" height="50" rx="6" />
@@ -122,7 +122,7 @@ function NearbyMap() {
         <span className="grid size-9 place-items-center rounded-xl bg-[#0ea5a4]/15 text-[#0ea5a4]"><Navigation className="size-4" /></span>
         <span className="flex-1 leading-tight">
           <span className="block text-sm font-bold text-heading">7 partners nearby</span>
-          <span className="text-[11px] text-muted">Map adjusts to where they are</span>
+          <span className="text-[0.6875rem] text-muted">Map adjusts to where they are</span>
         </span>
       </div>
     </PhoneShell>
@@ -137,7 +137,7 @@ function BillCashback() {
         <div className="flex items-center gap-2 border-b border-dashed border-line pb-2.5">
           <Receipt className="size-4 text-brand-orange" />
           <span className="text-sm font-extrabold text-heading">Highway Dhaba</span>
-          <span className="ml-auto text-[10px] text-muted">Bill #2481</span>
+          <span className="ml-auto text-[0.625rem] text-muted">Bill #2481</span>
         </div>
         <div className="space-y-1.5 py-2.5 text-xs text-muted">
           {["Thali × 2", "Lassi × 2", "Paratha × 3"].map((l) => (
@@ -154,18 +154,18 @@ function BillCashback() {
         </span>
       </div>
       <div className="mt-3 rounded-xl bg-surface-alt px-3 py-2.5 ring-1 ring-line">
-        <div className="flex items-center justify-between text-[11px] font-bold">
+        <div className="flex items-center justify-between text-[0.6875rem] font-bold">
           <span className="text-muted">Verifying with the Miles team</span>
           <span className="fm-ok flex items-center gap-1 text-emerald-500"><Check className="size-3.5" /> Verified</span>
         </div>
         <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-line"><div className="fm-verify h-full rounded-full bg-emerald-500" /></div>
       </div>
       {/* scratch card */}
-      <div className="relative mt-3 h-[118px] overflow-hidden rounded-2xl bg-gradient-to-br from-amber-300 to-orange-500 text-center text-white shadow-[0_14px_30px_-14px_rgb(255_90_0/0.7)]">
+      <div className="relative mt-3 h-[7.375rem] overflow-hidden rounded-2xl bg-gradient-to-br from-amber-300 to-orange-500 text-center text-white shadow-[0_14px_30px_-14px_rgb(255_90_0/0.7)]">
         <div className="flex h-full flex-col items-center justify-center">
           <PartyPopper className="fm-pop size-7" />
           <p className="mt-1 text-lg font-extrabold">Cashback won!</p>
-          <p className="text-[11px] font-semibold text-white/90">Added to your wallet</p>
+          <p className="text-[0.6875rem] font-semibold text-white/90">Added to your wallet</p>
         </div>
         <div className="fm-scratch absolute inset-0 grid place-items-center bg-[repeating-linear-gradient(45deg,#c7cedb_0_8px,#b4bccb_8px_16px)] text-sm font-extrabold text-[#55607a]">
           Scratch to reveal
@@ -181,7 +181,7 @@ function DutyJourney() {
   const C = 2 * Math.PI * R;
   return (
     <PhoneShell title="Duty journey" tint="#7c5cff">
-      <div className="relative mx-auto grid size-[200px] place-items-center">
+      <div className="relative mx-auto grid size-[12.5rem] place-items-center">
         <svg viewBox="0 0 180 180" className="absolute inset-0 size-full -rotate-90">
           <circle cx="90" cy="90" r={R} fill="none" stroke="var(--color-line)" strokeWidth="14" />
           <circle cx="90" cy="90" r={R} fill="none" stroke="url(#fm-duty)" strokeWidth="14" strokeLinecap="round" strokeDasharray={C} className="fm-ring" style={{ ["--c" as string]: `${C}` }} />
@@ -196,7 +196,7 @@ function DutyJourney() {
         {[{ v: "180", l: "day window" }, { v: "12", l: "to go" }, { v: "3", l: "pending" }].map((s) => (
           <div key={s.l} className="rounded-xl bg-surface-alt py-2 ring-1 ring-line">
             <p className="text-base font-extrabold text-heading">{s.v}</p>
-            <p className="text-[10px] font-semibold text-muted">{s.l}</p>
+            <p className="text-[0.625rem] font-semibold text-muted">{s.l}</p>
           </div>
         ))}
       </div>
@@ -205,7 +205,7 @@ function DutyJourney() {
           <div key={d.t} className="fm-row flex items-center gap-2.5 rounded-xl bg-card p-2.5 shadow-card ring-1 ring-line" style={{ animationDelay: `${1.2 + i * 0.3}s` }}>
             <span className="grid size-8 place-items-center rounded-lg bg-[#7c5cff]/15 text-[#7c5cff]"><Car className="size-4" /></span>
             <span className="flex-1 text-xs font-bold text-heading">{d.t}</span>
-            <span className={`rounded-full px-2 py-0.5 text-[10px] font-extrabold ${d.ok ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400" : "bg-amber-500/15 text-amber-600 dark:text-amber-400"}`}>{d.s}</span>
+            <span className={`rounded-full px-2 py-0.5 text-[0.625rem] font-extrabold ${d.ok ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400" : "bg-amber-500/15 text-amber-600 dark:text-amber-400"}`}>{d.s}</span>
           </div>
         ))}
       </div>
@@ -226,14 +226,14 @@ function WalletMock() {
       <div className="rounded-2xl bg-gradient-to-br from-[#16a34a] to-[#0ea5a4] p-4 text-white shadow-[0_14px_30px_-14px_rgb(22_163_74/0.7)]">
         <p className="flex items-center gap-1.5 text-xs font-semibold text-white/85"><Wallet className="size-3.5" /> Wallet balance</p>
         <p className="mt-1 text-3xl font-extrabold">₹ <CountUp to={1240} separator="," duration={2} /></p>
-        <p className="mt-1 text-[11px] font-semibold text-white/85">Total savings this month ↑</p>
+        <p className="mt-1 text-[0.6875rem] font-semibold text-white/85">Total savings this month ↑</p>
       </div>
       <div className="mt-3 grid grid-cols-2 gap-2.5">
         {tiles.map(({ l, v, Icon, c }) => (
           <div key={l} className="rounded-xl bg-card p-3 shadow-card ring-1 ring-line">
             <span className="grid size-8 place-items-center rounded-lg" style={{ background: `${c}22`, color: c }}><Icon className="size-4" /></span>
             <p className="mt-2 text-xl font-extrabold text-heading"><CountUp to={v} duration={1.8} /></p>
-            <p className="text-[10px] font-semibold text-muted">{l}</p>
+            <p className="text-[0.625rem] font-semibold text-muted">{l}</p>
           </div>
         ))}
       </div>
@@ -264,9 +264,9 @@ function ServicesMock() {
       <div className="grid grid-cols-3 gap-2.5">
         {s.map(({ l, Icon, c }, i) => (
           <div key={l} className="fm-tile relative rounded-2xl bg-card px-1 pb-2.5 pt-3 text-center shadow-card ring-1 ring-line" style={{ animationDelay: `${0.2 + i * 0.12}s` }}>
-            <span className="absolute -right-1 -top-1.5 rounded-full bg-emerald-500 px-1.5 py-px text-[8px] font-extrabold text-white">FREE</span>
+            <span className="absolute -right-1 -top-1.5 rounded-full bg-emerald-500 px-1.5 py-px text-[0.5rem] font-extrabold text-white">FREE</span>
             <span className="mx-auto grid size-11 place-items-center rounded-xl text-white" style={{ background: `linear-gradient(135deg, ${c}, color-mix(in srgb, ${c} 60%, #fff))` }}><Icon className="size-5" /></span>
-            <p className="mt-1.5 text-[10px] font-bold text-heading">{l}</p>
+            <p className="mt-1.5 text-[0.625rem] font-bold text-heading">{l}</p>
           </div>
         ))}
       </div>

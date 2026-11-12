@@ -10,6 +10,7 @@ export const site = {
   email: "support@milesassist.in",
   phone: "+91 85114 36397",
   phoneHref: "tel:+918511436397",
+  whatsapp: "918511436397", // same number, used for wa.me links
   address: {
     street: "4th Floor, 430 Pearl Plaza, Nr. Sandipani School, Naroda",
     city: "Ahmedabad",

@@ -166,3 +166,13 @@ html.theme-switching *::before,
 html.theme-switching *::after {
   transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease !important;
 }
+
+/* Large desktop monitors: scale the whole UI up proportionally (all sizes are in rem). */
+@media (min-width: 1800px) { html { font-size: 17px; } }
+@media (min-width: 2200px) { html { font-size: 18.5px; } }
+@media (min-width: 2500px) { html { font-size: 20px; } }
+
+@media print {
+  header, footer, .fc-btn, nav[aria-label="On this page"], details { display: none !important; }
+  #legal-article { border: 0 !important; box-shadow: none !important; padding: 0 !important; }
+}

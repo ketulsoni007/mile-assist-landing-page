@@ -5,6 +5,7 @@ import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
+import { FloatingContact } from "@/components/ui/FloatingContact";
 import { site, organizationJsonLd, websiteJsonLd, appJsonLd, jsonLdString } from "@/lib/seo";
 
 const THEME_SCRIPT = `(function(){try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.setAttribute("data-theme",t)}catch(e){}})()`;
@@ -70,6 +71,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <Navbar />
             {children}
             <Footer />
+            <FloatingContact />
           </SmoothScroll>
         </MotionProvider>
       </body>

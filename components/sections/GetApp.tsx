@@ -7,12 +7,12 @@ import { AppStreetScene } from "@/components/svg/AppStreetScene";
 function QrCard({ data, label }: { data: { size: number; path: string }; label: string }) {
   return (
     <figure className="group flex items-center gap-3 rounded-2xl bg-white p-2.5 pr-4 shadow-[0_14px_30px_-14px_rgb(0_0_0/0.45)] transition-transform duration-300 hover:-translate-y-1">
-      <svg viewBox={`-2 -2 ${data.size + 4} ${data.size + 4}`} className="size-[76px] rounded-lg" role="img" aria-label={`QR code: ${label}`} shapeRendering="crispEdges">
+      <svg viewBox={`-2 -2 ${data.size + 4} ${data.size + 4}`} className="size-[4.75rem] rounded-lg" role="img" aria-label={`QR code: ${label}`} shapeRendering="crispEdges">
         <rect x="-2" y="-2" width={data.size + 4} height={data.size + 4} fill="#fff" />
         <path d={data.path} fill="#081e4c" />
       </svg>
       <figcaption className="leading-tight">
-        <span className="block text-[11px] font-semibold uppercase tracking-wide text-[#51607a]">Scan to get</span>
+        <span className="block text-[0.6875rem] font-semibold uppercase tracking-wide text-[#51607a]">Scan to get</span>
         <span className="block text-sm font-extrabold text-[#081e4c]">{label}</span>
       </figcaption>
     </figure>
@@ -63,7 +63,7 @@ export function GetApp() {
               </div>
 
               {/* animated scene */}
-              <div className="relative h-80 sm:h-[26rem] lg:h-full lg:min-h-[560px]" aria-hidden="true">
+              <div className="relative h-80 sm:h-[26rem] lg:h-full lg:min-h-[35rem]" aria-hidden="true">
                 <AppStreetScene className="absolute inset-0 size-full [mask-image:linear-gradient(to_right,transparent,#000_14%)]" />
 
                 {/* reward toasts popping up along the way */}

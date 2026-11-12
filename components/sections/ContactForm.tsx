@@ -128,7 +128,7 @@ export function ContactForm() {
         ) : (
           <motion.form key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, y: -10 }} onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
             {/* honeypot: hidden from people, bots fill it */}
-            <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+            <div aria-hidden="true" className="absolute -left-[624.9375rem] h-0 w-0 overflow-hidden">
               <label htmlFor="ct-website">Website</label>
               <input id="ct-website" tabIndex={-1} autoComplete="off" {...register("website")} />
             </div>
@@ -180,7 +180,7 @@ export function ContactForm() {
 
             <Field id="ct-message" label="Your message" Icon={MessageSquareText} error={errors.message}>
               <textarea id="ct-message" rows={4} placeholder=" " maxLength={1500} aria-invalid={!!errors.message} aria-describedby={errors.message ? "ct-message-err" : undefined} className={cn(inputCls, "resize-none")} {...register("message")} />
-              <span className="pointer-events-none absolute bottom-2 right-3 text-[11px] font-medium text-muted">{message.length}/1500</span>
+              <span className="pointer-events-none absolute bottom-2 right-3 text-[0.6875rem] font-medium text-muted">{message.length}/1500</span>
             </Field>
 
             {/* consent */}

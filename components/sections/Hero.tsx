@@ -13,12 +13,12 @@ export function Hero() {
     <section
       id="top"
       aria-labelledby="hero-title"
-      className="relative isolate overflow-hidden bg-gradient-to-b from-hero-a via-hero-b to-hero-c pt-28 pb-10 lg:min-h-[740px] lg:pt-10 lg:pb-8"
+      className="relative isolate overflow-hidden bg-gradient-to-b from-hero-a via-hero-b to-hero-c pb-12 pt-28 lg:pb-16 lg:pt-32"
     >
       {/* interactive liquid background: swirls with the cursor, fades out towards the bottom */}
       <HeroBackground className="-z-10 [mask-image:linear-gradient(to_bottom,#000_60%,transparent)]" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-5 lg:flex lg:min-h-[720px] lg:items-center lg:px-8">
+      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-5 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-0 lg:px-8">
         <div className="max-w-xl">
           <Reveal>
             <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-orange-soft px-3 py-1 text-xs font-bold text-brand-orange ring-1 ring-brand-orange/15">
@@ -68,12 +68,13 @@ export function Hero() {
             </span>
           </Reveal>
         </div>
+
+        {/* visual: lives in the same container as the text, so both scale together on any screen */}
+        <HeroVisual className="relative -mx-5 w-[calc(100%+2.5rem)] sm:mx-0 sm:w-full lg:-mr-10 lg:w-[calc(100%+5rem)] lg:max-w-none xl:-mr-16 xl:w-[calc(100%+8rem)]">
+          <HeroShowcase className="h-auto w-full" />
+        </HeroVisual>
       </div>
 
-      {/* Visual: app mockup + glass cards. (The illustrated driver/car version is parked in components/svg/HeroScene.tsx and public/hero/.) */}
-      <HeroVisual className="relative mt-8 lg:absolute lg:bottom-0 lg:right-0 lg:top-10 lg:mt-0 lg:flex lg:w-[62%] lg:items-end xl:w-[57%]">
-        <HeroShowcase className="h-auto w-full" />
-      </HeroVisual>
     </section>
   );
 }

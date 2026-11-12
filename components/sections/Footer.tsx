@@ -6,7 +6,7 @@ import { site } from "@/lib/seo";
 import { mainNav } from "@/lib/nav";
 import { FooterYear, BackToTop } from "./FooterClient";
 
-const quickLinks = [{ href: "/", label: "Home" }, ...mainNav, { href: "/contact", label: "Contact Us" }];
+const quickLinks = [...mainNav, { href: "/contact", label: "Contact Us" }];
 
 // Same URLs as the current live site. The pages themselves still need to be added to this project.
 const legalLinks = [
@@ -44,7 +44,7 @@ export function Footer() {
       {/* animated road along the top edge */}
       <div className="relative h-16" aria-hidden="true">
         <div className="absolute inset-x-0 top-6 h-10 bg-[#0d1736]" />
-        <div className="ft-dash absolute inset-x-0 top-[2.6rem] h-[3px] opacity-70" style={{ backgroundImage: "repeating-linear-gradient(90deg, #fff 0 22px, transparent 22px 44px)", backgroundSize: "44px 3px" }} />
+        <div className="ft-dash absolute inset-x-0 top-[2.6rem] h-[0.1875rem] opacity-70" style={{ backgroundImage: "repeating-linear-gradient(90deg, #fff 0 22px, transparent 22px 44px)", backgroundSize: "44px 3px" }} />
         <div className="ft-car absolute top-[1.15rem]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/icons/car.svg" alt="" width={72} height={28} className="drop-shadow-[0_4px_8px_rgb(255_90_0/0.45)]" />

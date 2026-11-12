@@ -51,7 +51,7 @@ export function Contact() {
         {/* right: form card */}
         <Reveal delay={0.12} y={40}>
           <div className="relative">
-            <span className="pr-border pointer-events-none absolute -inset-[2px] rounded-[calc(2rem+2px)] p-[2px] opacity-70" aria-hidden="true" />
+            <span className="pr-border pointer-events-none absolute -inset-[0.125rem] rounded-[calc(2rem+2px)] p-[0.125rem] opacity-70" aria-hidden="true" />
             <div className="relative rounded-[2rem] border border-white/70 bg-card/85 p-6 shadow-[0_40px_90px_-40px_rgb(8_30_76/0.35)] backdrop-blur-xl dark:border-white/10 sm:p-9">
               <h3 className="text-2xl font-extrabold text-heading">Send us a message</h3>
               <p className="mt-1 text-sm text-muted">All fields are required.</p>

@@ -28,7 +28,7 @@ function HomeScreen() {
         <div className="flex items-center gap-2.5">
           <span className="grid size-9 place-items-center rounded-full bg-gradient-to-br from-brand-orange to-[#ff8a3d] text-sm font-extrabold text-white">R</span>
           <span className="flex-1 leading-tight">
-            <span className="block text-[10px] font-semibold text-muted">Good morning 👋</span>
+            <span className="block text-[0.625rem] font-semibold text-muted">Good morning 👋</span>
             <span className="block text-sm font-extrabold text-heading">Rahul</span>
           </span>
           <span className="fm-wave flex h-4 items-end gap-0.5 text-brand-orange" aria-hidden="true"><i className="h-2 w-0.5 bg-current" /><i className="h-4 w-0.5 bg-current" /><i className="h-2.5 w-0.5 bg-current" /></span>
@@ -36,7 +36,7 @@ function HomeScreen() {
         </div>
 
         {/* campaign carousel */}
-        <div className="relative h-[86px] overflow-hidden rounded-2xl">
+        <div className="relative h-[5.375rem] overflow-hidden rounded-2xl">
           <div className="fh-slides flex h-full w-[300%]">
             {[
               { t: "Free meals on NH 48", s: "12 new partner dhabas", from: "#ff7a1f", to: "#e84c00", Icon: Utensils },
@@ -45,9 +45,9 @@ function HomeScreen() {
             ].map(({ t, s, from, to, Icon }) => (
               <div key={t} className="relative flex h-full w-1/3 items-center gap-3 px-3.5 text-white" style={{ background: `linear-gradient(120deg, ${from}, ${to})` }}>
                 <span className="leading-tight">
-                  <span className="flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider text-white/80"><Megaphone className="size-3" /> Campaign</span>
+                  <span className="flex items-center gap-1 text-[0.5625rem] font-bold uppercase tracking-wider text-white/80"><Megaphone className="size-3" /> Campaign</span>
                   <span className="mt-0.5 block text-sm font-extrabold">{t}</span>
-                  <span className="text-[10px] text-white/85">{s}</span>
+                  <span className="text-[0.625rem] text-white/85">{s}</span>
                 </span>
                 <Icon className="absolute -right-2 -bottom-2 size-16 text-white/20" />
               </div>
@@ -58,12 +58,12 @@ function HomeScreen() {
 
         {/* tier / subscription */}
         <div className="rounded-2xl bg-gradient-to-br from-[#7a4421] via-[#c98048] to-[#8a4b22] p-3 text-white">
-          <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-white/85">
+          <div className="flex items-center justify-between text-[0.625rem] font-bold uppercase tracking-wider text-white/85">
             <span>Bronze member</span><span className="rounded-full bg-white/25 px-1.5 py-px">Free month</span>
           </div>
           <div className="mt-2 flex items-end justify-between">
             <span className="text-lg font-extrabold leading-none">22 days left</span>
-            <span className="text-[10px] font-semibold text-white/85">of 30</span>
+            <span className="text-[0.625rem] font-semibold text-white/85">of 30</span>
           </div>
           <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-white/25"><div className="fh-tier h-full rounded-full bg-white" /></div>
         </div>
@@ -72,9 +72,9 @@ function HomeScreen() {
         <div>
           <div className="mb-1.5 flex items-center justify-between">
             <span className="text-xs font-extrabold text-heading">Nearby partners</span>
-            <span className="text-[10px] font-bold text-brand-orange">See map</span>
+            <span className="text-[0.625rem] font-bold text-brand-orange">See map</span>
           </div>
-          <div className="relative h-[186px] overflow-hidden rounded-2xl ring-1 ring-line" style={{ background: "var(--map-bg)" }}>
+          <div className="relative h-[11.625rem] overflow-hidden rounded-2xl ring-1 ring-line" style={{ background: "var(--map-bg)" }}>
             <svg viewBox="0 0 240 186" className="absolute inset-0 size-full" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
               <g style={{ fill: "var(--map-block-2)" }}><rect x="8" y="8" width="60" height="34" rx="5" /><rect x="90" y="8" width="44" height="34" rx="5" /><rect x="160" y="70" width="70" height="40" rx="5" /><rect x="90" y="130" width="44" height="46" rx="5" /><rect x="8" y="130" width="60" height="46" rx="5" /></g>
               <g style={{ fill: "var(--map-park)" }}><rect x="8" y="64" width="60" height="46" rx="8" /><rect x="160" y="8" width="70" height="34" rx="8" /></g>
@@ -105,7 +105,7 @@ function HomeScreen() {
 
 export function FeaturesHeroVisual() {
   return (
-    <PlayOnView className="relative mx-auto h-[640px] w-full max-w-[38rem]">
+    <PlayOnView className="relative mx-auto h-[40rem] w-full max-w-[38rem]">
       {/* backdrop */}
       <div className="absolute inset-x-[8%] inset-y-[10%] -z-10 rounded-[3rem] bg-gradient-to-br from-brand-orange/15 via-[#7c5cff]/10 to-[#2f6bff]/15 blur-2xl" aria-hidden="true" />
       <div className="absolute inset-0 -z-10 opacity-70 [background-image:radial-gradient(var(--color-line)_1.3px,transparent_1.3px)] [background-size:20px_20px] [mask-image:radial-gradient(closest-side,#000,transparent)]" aria-hidden="true" />
@@ -132,9 +132,9 @@ export function FeaturesHeroVisual() {
       <Card className="-left-6 top-[24%] hidden w-[9.75rem] sm:block" delay={0}>
         <div className="flex items-center gap-2">
           <span className="grid size-8 place-items-center rounded-xl bg-[#2f6bff] text-white"><Route className="size-4" /></span>
-          <span className="leading-tight"><span className="block text-xs font-extrabold text-heading">8 partners</span><span className="text-[10px] text-muted">on your route</span></span>
+          <span className="leading-tight"><span className="block text-xs font-extrabold text-heading">8 partners</span><span className="text-[0.625rem] text-muted">on your route</span></span>
         </div>
-        <div className="mt-2 flex items-center gap-1.5 text-[10px] font-semibold text-muted">
+        <div className="mt-2 flex items-center gap-1.5 text-[0.625rem] font-semibold text-muted">
           <span className="size-2 rounded-full bg-emerald-500" />Ahmedabad<span className="h-px flex-1 border-t border-dashed border-line" /><span className="size-2 rounded-full bg-brand-orange" />Vadodara
         </div>
       </Card>
@@ -144,8 +144,8 @@ export function FeaturesHeroVisual() {
         <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-amber-300 to-orange-500 px-3 py-3 text-center text-white">
           <PartyPopper className="fh-wiggle mx-auto size-5" />
           <p className="mt-0.5 text-sm font-extrabold">Cashback won!</p>
-          <p className="text-[9px] font-semibold text-white/90">Bill verified</p>
-          <span className="fh-scratch absolute inset-0 grid place-items-center bg-[repeating-linear-gradient(45deg,#c7cedb_0_6px,#b4bccb_6px_12px)] text-[10px] font-extrabold text-[#55607a]">Scratch</span>
+          <p className="text-[0.5625rem] font-semibold text-white/90">Bill verified</p>
+          <span className="fh-scratch absolute inset-0 grid place-items-center bg-[repeating-linear-gradient(45deg,#c7cedb_0_6px,#b4bccb_6px_12px)] text-[0.625rem] font-extrabold text-[#55607a]">Scratch</span>
         </div>
       </Card>
 
@@ -153,7 +153,7 @@ export function FeaturesHeroVisual() {
       <Card className="-left-2 bottom-[4%] hidden w-[9.75rem] sm:block" delay={2}>
         <div className="flex items-center gap-2.5">
           <svg viewBox="0 0 40 40" className="size-11 -rotate-90"><circle cx="20" cy="20" r="16" fill="none" stroke="var(--color-line)" strokeWidth="5" /><circle cx="20" cy="20" r="16" fill="none" stroke="#7c5cff" strokeWidth="5" strokeLinecap="round" strokeDasharray="100.5" className="fh-duty" /></svg>
-          <span className="leading-tight"><span className="block text-sm font-extrabold text-heading">48 / 60</span><span className="text-[10px] text-muted">duties · 180 days</span></span>
+          <span className="leading-tight"><span className="block text-sm font-extrabold text-heading">48 / 60</span><span className="text-[0.625rem] text-muted">duties · 180 days</span></span>
         </div>
       </Card>
 
@@ -161,7 +161,7 @@ export function FeaturesHeroVisual() {
       <Card className="-right-6 top-[26%] w-[10rem]" delay={3}>
         <div className="flex items-center gap-2">
           <span className="grid size-8 place-items-center rounded-xl bg-brand-orange text-white"><Utensils className="size-4" /></span>
-          <span className="min-w-0 flex-1 leading-tight"><span className="block text-xs font-extrabold text-heading">Free meal</span><span className="block truncate text-[10px] text-muted">Highway Dhaba</span></span>
+          <span className="min-w-0 flex-1 leading-tight"><span className="block text-xs font-extrabold text-heading">Free meal</span><span className="block truncate text-[0.625rem] text-muted">Highway Dhaba</span></span>
           <span className="grid size-5 place-items-center rounded-full bg-emerald-500 text-white"><Check className="size-3" strokeWidth={3.5} /></span>
         </div>
       </Card>
@@ -170,15 +170,15 @@ export function FeaturesHeroVisual() {
       <Card className="-right-4 top-[52%] hidden w-[9.5rem] sm:block" delay={4}>
         <div className="flex items-center gap-2">
           <span className="relative grid size-8 place-items-center rounded-full bg-[#e0457b] text-white"><span className="absolute inset-0 animate-ping rounded-full bg-[#e0457b]/50" /><PhoneIcon className="relative size-4" /></span>
-          <span className="leading-tight"><span className="block text-xs font-extrabold text-heading">Need Help</span><span className="text-[10px] text-muted">Live call · 24/7</span></span>
+          <span className="leading-tight"><span className="block text-xs font-extrabold text-heading">Need Help</span><span className="text-[0.625rem] text-muted">Live call · 24/7</span></span>
         </div>
       </Card>
 
       {/* 6 rate the place */}
       <Card className="-right-2 bottom-[4%] w-[10rem]" delay={5}>
-        <p className="text-[10px] font-bold uppercase tracking-wide text-muted">Rate the place</p>
+        <p className="text-[0.625rem] font-bold uppercase tracking-wide text-muted">Rate the place</p>
         <span className="mt-1 flex gap-0.5">{[0, 1, 2, 3, 4].map((i) => <Star key={i} className="fm-star size-4 text-amber-400" style={{ animationDelay: `${2 + i * 0.15}s` }} />)}</span>
-        <p className="mt-1 flex items-center gap-1 text-[10px] font-semibold text-muted"><Car className="size-3" /> 1,284 drivers visited</p>
+        <p className="mt-1 flex items-center gap-1 text-[0.625rem] font-semibold text-muted"><Car className="size-3" /> 1,284 drivers visited</p>
       </Card>
     </PlayOnView>
   );

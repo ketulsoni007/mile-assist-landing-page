@@ -36,20 +36,20 @@ export function SupportChat({ className }: { className?: string }) {
             </span>
             <span className="flex-1 leading-tight">
               <span className="block text-sm font-extrabold">Miles Assist Support</span>
-              <span className="flex items-center gap-1 text-[11px] font-semibold text-white/90">
+              <span className="flex items-center gap-1 text-[0.6875rem] font-semibold text-white/90">
                 <span className="size-1.5 animate-pulse rounded-full bg-emerald-300" /> Online now
               </span>
             </span>
-            <span className="rounded-full bg-white/20 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide ring-1 ring-white/40">24/7</span>
+            <span className="rounded-full bg-white/20 px-2.5 py-1 text-[0.625rem] font-bold uppercase tracking-wide ring-1 ring-white/40">24/7</span>
           </div>
 
           {/* conversation */}
-          <div className="relative h-[17rem] space-y-3 bg-surface-alt/60 p-4 text-[13px] leading-snug">
+          <div className="relative h-[17rem] space-y-3 bg-surface-alt/60 p-4 text-[0.8125rem] leading-snug">
             {/* visitor */}
             <div className="sc-msg flex items-end justify-end gap-2" style={{ ["--t" as string]: "0.4s" }}>
               <div className="max-w-[78%] rounded-2xl rounded-br-md bg-[#081e4c] px-3.5 py-2.5 text-white shadow-md dark:bg-[#2a3d78]">
                 Hi! I run a dhaba on NH 48. How can we become a partner?
-                <span className="mt-1 flex items-center justify-end gap-1 text-[10px] text-white/70">10:42 <CheckCheck className="size-3.5 text-sky-300" /></span>
+                <span className="mt-1 flex items-center justify-end gap-1 text-[0.625rem] text-white/70">10:42 <CheckCheck className="size-3.5 text-sky-300" /></span>
               </div>
             </div>
 
@@ -62,7 +62,7 @@ export function SupportChat({ className }: { className?: string }) {
                 </div>
                 <div className="sc-msg max-w-[16rem] rounded-2xl rounded-bl-md bg-card px-3.5 py-2.5 text-heading shadow-md ring-1 ring-line" style={{ ["--t" as string]: "3.4s" }}>
                   Great to hear! 🙌 Our partner team will call you to set up driver footfall and bill tracking.
-                  <span className="mt-1 block text-right text-[10px] text-muted">10:43</span>
+                  <span className="mt-1 block text-right text-[0.625rem] text-muted">10:43</span>
                 </div>
               </div>
             </div>

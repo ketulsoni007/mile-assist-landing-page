@@ -38,7 +38,7 @@ function Badge({ step, progress, threshold }: { step: Step; progress: MotionValu
         </>
       )}
       {last && reached && [0, 1, 2, 3, 4].map((i) => (
-        <span key={i} className="hw-coin absolute left-1/2 top-1/2 grid size-6 place-items-center rounded-full bg-amber-400 text-[11px] font-extrabold text-amber-900 shadow-md" style={{ ["--a" as string]: `${-70 + i * 35}deg`, animationDelay: `${i * 0.08}s` }}>₹</span>
+        <span key={i} className="hw-coin absolute left-1/2 top-1/2 grid size-6 place-items-center rounded-full bg-amber-400 text-[0.6875rem] font-extrabold text-amber-900 shadow-md" style={{ ["--a" as string]: `${-70 + i * 35}deg`, animationDelay: `${i * 0.08}s` }}>₹</span>
       ))}
       <motion.div
         style={{ scale, background: `linear-gradient(135deg, ${color}, color-mix(in srgb, ${color} 55%, #fff))`, boxShadow: `0 16px 32px -12px ${color}` }}

@@ -59,3 +59,28 @@ export const tiers: Tier[] = [
     colors: { from: "#8a5a00", via: "#f2c14e", to: "#a36d00", ink: "#fffaf0", glow: "rgb(242 193 78 / 0.6)" },
   },
 ];
+
+/** Tier comparison table. true = included, false = not included, string = value. Source: App Update Report v0.1. */
+export const tierRows: { label: string; values: [boolean | string, boolean | string, boolean | string] }[] = [
+  { label: "Cashback on verified bills", values: ["Up to ₹250", "Up to ₹600", "Highest"] },
+  { label: "Free food & free stay at partners", values: [true, true, true] },
+  { label: "24/7 driver support", values: [true, true, true] },
+  { label: "Free first lawyer call", values: [true, true, true] },
+  { label: "Roadside assistance: Need Help live call", values: [true, true, true] },
+  { label: "Additional personal support", values: [false, true, true] },
+  { label: "On-call legal support", values: [false, true, true] },
+  { label: "Driver uniform", values: [false, true, true] },
+  { label: "Tier sticker", values: ["Bronze", "Silver", "Golden"] },
+  { label: "Life & accident insurance cover", values: [false, false, true] },
+  { label: "Full RSA: breakdown, jump-start, fuel, puncture, health check", values: [false, false, true] },
+  { label: "Car insurance & tyre support vouchers", values: [false, false, true] },
+  { label: "Business support", values: [false, false, true] },
+];
+
+export const pricingFaqs = [
+  { q: "Is the first month really free?", a: "Yes. Once your KYC is verified you get a 1 month free subscription with full access to Miles Assist services." },
+  { q: "How much does Miles Assist cost after the free month?", a: "The Miles Assist Driver Plan is ₹163 per month after your free month, which works out to about ₹5.4 a day." },
+  { q: "Do I pay more for Silver or Gold?", a: "No. Every driver is on the same plan. Bronze, Silver and Gold are levels you move up through as you keep driving with Miles Assist, unlocking bigger cashback and more support." },
+  { q: "Do hotels and restaurants pay to partner?", a: "Partners pay a 0% platform fee, and listing and the partner dashboard are free." },
+  { q: "Where can I read the refund and cancellation terms?", a: "See our Refund Policy and Cancellation Policy pages, or contact support@milesassist.in." },
+];
