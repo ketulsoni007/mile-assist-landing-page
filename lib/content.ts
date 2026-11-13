@@ -1,5 +1,5 @@
 // Single source of truth for page copy. DRAFT copy: no numbers (cashback %, free-meal rules) until confirmed.
-import { Car, Store, MapPinned, ThumbsUp, Users, UserPlus, Utensils, ReceiptText, type LucideIcon } from "lucide-react";
+import { Building2, Car, Store, MapPinned, ThumbsUp, UserPlus, Utensils, ReceiptText, type LucideIcon } from "lucide-react";
 
 export type Role = {
   id: string;
@@ -22,22 +22,22 @@ export const roles: Role[] = [
     href: "#contact",
   },
   {
-    id: "partners",
-    title: "For Hotels & Restaurants",
-    text: "Grow with a network of drivers who bring guests to your door.",
-    points: ["Driver footfall generation", "Digital bill & payout tracking", "Dashboard & alerts", "Verified partner network"],
-    Icon: Store,
-    color: "#2f6bff",
-    href: "#contact",
+    id: "hotels",
+    title: "For Hotels",
+    text: "Fill more rooms with guests that verified drivers bring to your door.",
+    points: ["Guests referred by verified drivers", "Digital bill & payout tracking", "Partner dashboard & alerts", "Verified partner listing"],
+    Icon: Building2,
+    color: "#7c5cff",
+    href: "/partner",
   },
   {
-    id: "customers",
-    title: "For Customers",
-    text: "Travel smarter and save at places your driver trusts.",
-    points: ["Book intercity cabs", "Discover hotels & restaurants", "10% instant discount at partners"],
-    Icon: Users,
-    color: "#7c5cff",
-    href: "#how-it-works",
+    id: "restaurants",
+    title: "For Restaurants",
+    text: "Get drivers to stop at your restaurant or dhaba with their passengers.",
+    points: ["Driver footfall on every route", "Digital bill & payout tracking", "Partner dashboard & alerts", "Verified partner listing"],
+    Icon: Utensils,
+    color: "#2f6bff",
+    href: "/partner",
   },
 ];
 

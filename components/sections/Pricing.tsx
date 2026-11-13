@@ -77,11 +77,11 @@ export function Pricing() {
           </Reveal>
           <Reveal delay={0.08}>
             <h2 id="pricing-title" className="mt-5 text-4xl font-extrabold tracking-tight text-heading sm:text-5xl">
-              Start free. <span className="text-brand-orange">Stay for ₹{plan.price}.</span>
+              Your first month is <span className="free-word">FREE.</span>
             </h2>
           </Reveal>
           <Reveal delay={0.16}>
-            <p className="mt-4 text-lg text-body">One simple plan for every driver. Your first month is on us. Then pay monthly, or yearly and get 2 months free. You earn bigger rewards as you level up.</p>
+            <p className="mt-4 text-lg text-body">Every driver gets the full plan free for the first month, unlocked when your KYC is verified. After that it is one simple plan, and you earn bigger rewards as you level up.</p>
           </Reveal>
         </div>
 
@@ -89,45 +89,39 @@ export function Pricing() {
         <Reveal delay={0.1} y={40}>
           <div className="relative mx-auto mt-14 max-w-5xl">
             <span className="pr-border pointer-events-none absolute -inset-[0.1875rem] rounded-[calc(2rem+3px)] p-[0.1875rem]" aria-hidden="true" />
-            <div className="relative grid overflow-hidden rounded-[2rem] bg-card shadow-[0_40px_90px_-40px_rgb(255_90_0/0.45)] md:grid-cols-[1fr_1.15fr]">
+            <div className="relative grid overflow-hidden rounded-[2rem] bg-card shadow-[0_40px_90px_-45px_rgb(8_30_76/0.45)] md:grid-cols-[1fr_1.15fr]">
               {/* price side */}
-              <div className="relative overflow-hidden bg-gradient-to-br from-[#ff7a1f] via-brand-orange to-[#e84c00] p-8 text-white sm:p-10">
-                <div className="pointer-events-none absolute inset-0 opacity-25 [background-image:radial-gradient(rgb(255_255_255/0.6)_1.2px,transparent_1.2px)] [background-size:20px_20px]" aria-hidden="true" />
-                {/* ribbon */}
-                <span className="absolute -right-12 top-7 rotate-45 bg-[#081e4c] px-14 py-1.5 text-xs font-extrabold uppercase tracking-widest shadow-lg">
-                  1 month free
-                </span>
+              <div className="soft-panel relative overflow-hidden p-8 sm:p-10">
+                <div className="pointer-events-none absolute inset-0 soft-panel-dots" aria-hidden="true" />
+                <p className="relative text-sm font-bold uppercase tracking-widest text-brand-orange">{plan.name}</p>
 
-                <p className="relative text-sm font-bold uppercase tracking-widest text-white/85">{plan.name}</p>
+                {/* the offer first: FREE is the loudest thing on the card */}
+                <p className="relative mt-6 flex items-center gap-2.5 text-sm font-extrabold uppercase tracking-widest text-heading">
+                  <span className="pr-gift grid size-9 place-items-center rounded-xl bg-brand-orange text-white shadow-lg"><Gift className="size-5" /></span>
+                  Your first month
+                </p>
+                <p className="free-word relative mt-2 text-[5.5rem] font-extrabold leading-[0.95] tracking-tight sm:text-[7.5rem]">FREE</p>
+                <p className="relative mt-3 flex flex-wrap items-center gap-x-3 gap-y-2">
+                  <span className="rounded-full bg-emerald-500 px-3 py-1 text-sm font-extrabold text-white">₹0 for 30 days</span>
+                  <span className="text-sm font-medium text-body">Unlocked when your KYC is verified</span>
+                </p>
 
-                {/* timeline: free month -> paid */}
-                <div className="relative mt-6 flex items-center gap-3">
-                  <span className="pr-gift grid size-12 place-items-center rounded-2xl bg-white text-brand-orange shadow-lg">
-                    <Gift className="size-6" />
-                  </span>
-                  <span className="leading-tight">
-                    <span className="block text-2xl font-extrabold">First month FREE</span>
-                    <span className="block text-sm font-medium text-white/85">Unlocked when your KYC is verified</span>
-                  </span>
-                </div>
-                <div className="relative ml-6 mt-2 h-8 w-0.5 overflow-hidden rounded-full bg-white/30">
-                  <span className="pr-flow absolute inset-x-0 top-0 h-1/2 rounded-full bg-white" />
-                </div>
-
-                <BillingProvider>
-                  <BillingSwitch tone="light" className="relative mt-3" />
-                  <p className="relative mt-4">
-                    <BillingAmount className="text-6xl font-extrabold tabular-nums tracking-tight sm:text-7xl" unitClassName="mb-2 text-lg font-bold text-white/85" />
-                  </p>
-                  <p className="relative mt-2 min-h-[2.5rem] text-sm font-semibold text-white/90">
-                    <BillingNote prefix="after your free month · " />
-                  </p>
-                </BillingProvider>
-                <p className="sr-only">₹{plan.price} per month, or ₹{inr(billing.yearly.price)} per year (save ₹{billing.yearlySaving}).</p>
-
-                <a href="#download" className="group relative mt-8 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-extrabold text-brand-orange shadow-[0_14px_30px_-12px_rgb(0_0_0/0.45)] transition hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+                <a href="#download" className="group relative mt-7 inline-flex items-center gap-2 rounded-full bg-brand-orange px-6 py-3.5 text-sm font-extrabold text-white shadow-[0_14px_30px_-14px_rgb(255_90_0/0.6)] transition hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-orange">
                   Start your free month <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
                 </a>
+
+                {/* the price comes second, and quieter */}
+                <div className="relative mt-8 border-t border-line pt-6">
+                  <p className="text-xs font-bold uppercase tracking-wider text-muted">After your free month</p>
+                  <BillingProvider>
+                    <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-3">
+                      <BillingAmount className="text-3xl font-extrabold tabular-nums tracking-tight" unitClassName="mb-0.5 text-sm font-bold text-muted" />
+                      <BillingSwitch size="sm" />
+                    </div>
+                    <p className="mt-2 min-h-[2.5rem] text-sm font-medium text-body"><BillingNote /></p>
+                  </BillingProvider>
+                  <p className="sr-only">₹{plan.price} per month, or ₹{inr(billing.yearly.price)} per year (save ₹{billing.yearlySaving}).</p>
+                </div>
               </div>
 
               {/* includes side */}

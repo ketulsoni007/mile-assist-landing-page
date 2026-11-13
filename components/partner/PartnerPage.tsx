@@ -69,11 +69,11 @@ function ChooseType() {
   return (
     <section id="choose" aria-labelledby="choose-title" className="relative isolate scroll-mt-24 overflow-hidden bg-surface py-24">
       <div className="pointer-events-none absolute left-1/2 top-40 -z-10 size-[40rem] -translate-x-1/2 rounded-full bg-brand-orange/[0.07] blur-3xl" aria-hidden="true" />
-      <div className="mx-auto max-w-5xl px-5 lg:px-8">
+      <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <Reveal><span className={eyebrow}><Building2 className="size-3.5" /> Step 1</span></Reveal>
-          <Reveal delay={0.08}><h2 id="choose-title" className="mt-5 text-4xl font-extrabold tracking-tight text-heading sm:text-5xl">What type of business <span className="text-brand-orange">do you run?</span></h2></Reveal>
-          <Reveal delay={0.14}><p className="mt-4 text-lg text-body">Select your category to begin registration.</p></Reveal>
+          <Reveal delay={0.08}><h2 id="choose-title" className="mt-5 text-4xl font-extrabold tracking-tight text-heading sm:text-5xl">How do you want <span className="text-brand-orange">to join?</span></h2></Reveal>
+          <Reveal delay={0.14}><p className="mt-4 text-lg text-body">Hotel, restaurant or driver: pick one to begin.</p></Reveal>
         </div>
         <Reveal delay={0.1} y={40} className="mt-14">
           <PartnerPicker />
@@ -149,23 +149,23 @@ function BenefitsBand() {
 
 function PartnerCta() {
   return (
-    <section className="relative isolate overflow-hidden bg-gradient-to-br from-[#ff7a1f] via-brand-orange to-[#e84c00] py-20 text-center text-white">
-      <div className="pointer-events-none absolute inset-0 -z-10 opacity-25 [background-image:radial-gradient(rgb(255_255_255/0.5)_1.2px,transparent_1.2px)] [background-size:1.375rem_1.375rem]" aria-hidden="true" />
+    <section className="relative isolate overflow-hidden soft-panel py-20 text-center">
+      <div className="pointer-events-none absolute inset-0 -z-10 soft-panel-dots" aria-hidden="true" />
       <div className="mx-auto max-w-3xl px-5">
         <Reveal><h2 className="text-3xl font-extrabold sm:text-5xl">Ready to reach intercity travellers?</h2></Reveal>
-        <Reveal delay={0.08}><p className="mx-auto mt-4 max-w-xl text-lg text-white/90">Join the growing network of hotels and restaurants trusted by Miles Assist drivers across India.</p></Reveal>
+        <Reveal delay={0.08}><p className="mx-auto mt-4 max-w-xl text-lg text-body">Join the growing network of hotels and restaurants trusted by Miles Assist drivers across India.</p></Reveal>
         <Reveal delay={0.16} className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
           {partnerTypes.map((p) => {
             const I = p.id === "hotel" ? Building2 : Utensils;
             return (
-              <a key={p.id} href={p.href} target="_blank" rel="noopener noreferrer" className="group inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-white px-8 py-4 font-extrabold text-brand-orange shadow-[0_14px_30px_-12px_rgb(0_0_0/0.45)] transition hover:-translate-y-0.5 sm:w-auto">
+              <a key={p.id} href={p.href} target="_blank" rel="noopener noreferrer" className="group inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-brand-orange px-8 py-4 font-extrabold text-white shadow-[0_14px_30px_-14px_rgb(255_90_0/0.6)] transition hover:-translate-y-0.5 sm:w-auto">
                 <I className="size-5" /> Register as {p.short} <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
               </a>
             );
           })}
         </Reveal>
-        <p className="mt-6 text-sm text-white/80">
-          Questions first? <Link href="/contact" className="font-bold underline underline-offset-2">Talk to our team</Link>
+        <p className="mt-6 text-sm text-muted">
+          Questions first? <Link href="/contact" className="font-bold text-brand-orange underline underline-offset-2">Talk to our team</Link>
         </p>
       </div>
     </section>

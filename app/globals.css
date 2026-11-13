@@ -176,3 +176,44 @@ html.theme-switching *::after {
   header, footer, .fc-btn, nav[aria-label="On this page"], details { display: none !important; }
   #legal-article { border: 0 !important; box-shadow: none !important; padding: 0 !important; }
 }
+
+/* ───────── soft brand panel ─────────
+   Replaces the old full-strength orange backgrounds (manager: too harsh on the eyes). Pale peach in light mode,
+   deep navy with a warm tint in dark mode. Text inside uses the normal theme tokens (text-heading / text-body). */
+.soft-panel {
+  --as-skyline: #ff5a00;
+  --as-cloud: #ffffff;
+  --as-bird: #c2703a;
+  --as-sun: #ffc24d;
+  color: var(--heading);
+  background: linear-gradient(135deg, #fff7f0 0%, #ffecdb 55%, #fff1e3 100%);
+  box-shadow: inset 0 0 0 1px rgb(255 90 0 / 0.16), 0 30px 60px -45px rgb(8 30 76 / 0.35);
+}
+[data-theme="dark"] .soft-panel {
+  --as-skyline: #ffffff;
+  --as-cloud: #c9d4f2;
+  --as-bird: #ffffff;
+  --as-sun: #fff6dc;
+  background: linear-gradient(135deg, #131b3d 0%, #1b1936 55%, #251a30 100%);
+  box-shadow: inset 0 0 0 1px rgb(255 138 61 / 0.2), 0 30px 60px -45px rgb(0 0 0 / 0.7);
+}
+.soft-panel-dots {
+  background-image: radial-gradient(rgb(255 90 0 / 0.14) 1.2px, transparent 1.2px);
+  background-size: 1.375rem 1.375rem;
+}
+[data-theme="dark"] .soft-panel-dots {
+  background-image: radial-gradient(rgb(255 255 255 / 0.07) 1.2px, transparent 1.2px);
+}
+
+/* The word FREE on pricing: the first thing the eye should land on (manager's "70% off" rule). */
+.free-word {
+  background-image: linear-gradient(100deg, #ff5a00 0%, #ff7a1f 38%, #ffc24d 50%, #ff7a1f 62%, #ff5a00 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: free-shine 4s linear infinite;
+}
+@keyframes free-shine { from { background-position: 125% 0; } to { background-position: -125% 0; } }
+@media (prefers-reduced-motion: reduce) { .free-word { animation: none; background-position: 50% 0; } }

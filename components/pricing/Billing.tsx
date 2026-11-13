@@ -20,7 +20,7 @@ export function BillingProvider({ children, initial = "monthly" }: { children: R
 export const useBilling = () => useContext(Ctx);
 
 /** Pill switch. tone="light" for use on orange/dark backgrounds. */
-export function BillingSwitch({ tone = "default", className }: { tone?: "default" | "light"; className?: string }) {
+export function BillingSwitch({ tone = "default", size = "md", className }: { tone?: "default" | "light"; size?: "sm" | "md"; className?: string }) {
   const { cycle, setCycle } = useBilling();
   const light = tone === "light";
   return (
@@ -35,7 +35,8 @@ export function BillingSwitch({ tone = "default", className }: { tone?: "default
             aria-checked={on}
             onClick={() => setCycle(c)}
             className={cn(
-              "relative flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-extrabold transition-colors",
+              "relative flex items-center gap-1.5 rounded-full font-extrabold transition-colors",
+              size === "sm" ? "px-3 py-1.5 text-xs" : "px-4 py-2 text-sm",
               on ? (light ? "text-brand-orange" : "text-white") : light ? "text-white/85 hover:text-white" : "text-heading hover:text-brand-orange",
             )}
           >

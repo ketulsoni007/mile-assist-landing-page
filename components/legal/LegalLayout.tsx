@@ -69,15 +69,15 @@ export function LegalLayout({ title, updated, summary, eyebrow, href, toc, child
             </article>
 
             {/* help card */}
-            <div className="mt-8 grid gap-5 rounded-[2rem] bg-gradient-to-br from-[#ff7a1f] via-brand-orange to-[#e84c00] p-7 text-white shadow-[0_30px_70px_-35px_rgb(255_90_0/0.7)] sm:grid-cols-[1fr_auto] sm:items-center sm:p-9">
+            <div className="mt-8 grid gap-5 rounded-[2rem] soft-panel p-7 sm:grid-cols-[1fr_auto] sm:items-center sm:p-9">
               <div>
                 <p className="text-2xl font-extrabold">Questions about this policy?</p>
-                <p className="mt-1 text-white/90">Our team is happy to help. Reach out any time.</p>
+                <p className="mt-1 text-body">Our team is happy to help. Reach out any time.</p>
               </div>
               <div className="flex flex-wrap gap-2.5">
-                <a href={`mailto:${site.email}`} className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-sm font-extrabold text-brand-orange transition hover:-translate-y-0.5"><Mail className="size-4" /> Email</a>
-                <a href={site.phoneHref} className="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2.5 text-sm font-extrabold ring-1 ring-white/40 transition hover:bg-white/25"><Phone className="size-4" /> Call</a>
-                <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2.5 text-sm font-extrabold ring-1 ring-white/40 transition hover:bg-white/25"><MessageCircle className="size-4" /> WhatsApp</a>
+                <a href={`mailto:${site.email}`} className="inline-flex items-center gap-2 rounded-full bg-brand-orange px-4 py-2.5 text-sm font-extrabold text-white transition hover:-translate-y-0.5"><Mail className="size-4" /> Email</a>
+                <a href={site.phoneHref} className="inline-flex items-center gap-2 rounded-full border border-brand-orange/50 px-4 py-2.5 text-sm font-extrabold text-brand-orange transition hover:bg-brand-orange/10"><Phone className="size-4" /> Call</a>
+                <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-brand-orange/50 px-4 py-2.5 text-sm font-extrabold text-brand-orange transition hover:bg-brand-orange/10"><MessageCircle className="size-4" /> WhatsApp</a>
               </div>
             </div>
 

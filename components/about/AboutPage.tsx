@@ -81,12 +81,12 @@ function Story() {
           </Reveal>
         </div>
         <Reveal delay={0.1} y={40}>
-          <figure className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#ff7a1f] via-brand-orange to-[#e84c00] p-8 text-white shadow-[0_40px_80px_-40px_rgb(255_90_0/0.75)] sm:p-10">
-            <div className="pointer-events-none absolute inset-0 opacity-25 [background-image:radial-gradient(rgb(255_255_255/0.5)_1.2px,transparent_1.2px)] [background-size:1.375rem_1.375rem]" aria-hidden="true" />
-            <svg viewBox="0 0 100 80" className="relative w-14 text-white/40" aria-hidden="true"><path fill="currentColor" d="M0 80V48C0 22 12 6 36 0l4 10C26 16 20 26 20 40h18v40zm56 0V48c0-26 12-42 36-48l4 10C82 16 76 26 76 40h18v40z" /></svg>
+          <figure className="relative overflow-hidden rounded-[2rem] soft-panel p-8 sm:p-10">
+            <div className="pointer-events-none absolute inset-0 soft-panel-dots" aria-hidden="true" />
+            <svg viewBox="0 0 100 80" className="relative w-14 text-brand-orange/50" aria-hidden="true"><path fill="currentColor" d="M0 80V48C0 22 12 6 36 0l4 10C26 16 20 26 20 40h18v40zm56 0V48c0-26 12-42 36-48l4 10C82 16 76 26 76 40h18v40z" /></svg>
             <blockquote className="relative mt-5 text-2xl font-extrabold leading-snug sm:text-3xl">Every mile a driver covers should come with comfort, respect and someone in their corner.</blockquote>
-            <figcaption className="relative mt-6 flex items-center gap-3 text-sm font-semibold text-white/85">
-              <span className="h-px w-8 bg-white/60" /> The Miles Assist promise
+            <figcaption className="relative mt-6 flex items-center gap-3 text-sm font-semibold text-body">
+              <span className="h-px w-8 bg-brand-orange/60" /> The Miles Assist promise
             </figcaption>
           </figure>
         </Reveal>
@@ -241,13 +241,13 @@ function AboutCta() {
     <section className="bg-surface-alt pb-24">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <Reveal y={40}>
-          <div className="relative isolate overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#ff7a1f] via-brand-orange to-[#e84c00] px-8 py-12 text-center text-white sm:px-12">
-            <div className="pointer-events-none absolute inset-0 -z-10 opacity-25 [background-image:radial-gradient(rgb(255_255_255/0.5)_1.2px,transparent_1.2px)] [background-size:1.375rem_1.375rem]" aria-hidden="true" />
+          <div className="relative isolate overflow-hidden rounded-[2rem] soft-panel px-8 py-12 text-center sm:px-12">
+            <div className="pointer-events-none absolute inset-0 -z-10 soft-panel-dots" aria-hidden="true" />
             <h2 className="text-3xl font-extrabold sm:text-4xl">Join our growing community</h2>
-            <p className="mx-auto mt-3 max-w-xl text-white/90">Drivers, hotels and restaurants across India are already on the road with Miles Assist.</p>
+            <p className="mx-auto mt-3 max-w-xl text-body">Drivers, hotels and restaurants across India are already on the road with Miles Assist.</p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <StoreBadges />
-              <Link href="/partner" className="group inline-flex items-center gap-2 rounded-full bg-white/15 px-6 py-3.5 text-sm font-extrabold ring-1 ring-white/40 backdrop-blur transition hover:bg-white hover:text-brand-orange">
+              <Link href="/partner" className="group inline-flex items-center gap-2 rounded-full border-2 border-brand-orange/60 px-6 py-3 text-sm font-extrabold text-brand-orange transition hover:bg-brand-orange hover:text-white">
                 Become a partner <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </div>

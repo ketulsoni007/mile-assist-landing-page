@@ -60,7 +60,7 @@ function Field({ id, label, Icon, error, children, filled }: { id: string; label
 
 const inputCls = "peer block w-full rounded-2xl bg-transparent pb-2 pl-12 pr-4 pt-6 text-base text-heading outline-none placeholder:text-transparent";
 
-export function ContactForm() {
+export function ContactForm({ defaultType }: { defaultType?: (typeof INQUIRY_TYPES)[number] } = {}) {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [serverError, setServerError] = useState("");
   const startedAt = useRef(0);
@@ -74,7 +74,7 @@ export function ContactForm() {
     watch,
     reset,
     formState: { errors },
-  } = useForm<ContactInput>({ resolver: zodResolver(contactSchema), mode: "onTouched", defaultValues: { consent: undefined } });
+  } = useForm<ContactInput>({ resolver: zodResolver(contactSchema), mode: "onTouched", defaultValues: { consent: undefined, type: defaultType } });
 
   const type = watch("type");
   const consent = watch("consent");
@@ -92,7 +92,7 @@ export function ContactForm() {
       const json = await res.json().catch(() => ({}));
       if (!res.ok || !json.ok) throw new Error(json.error || "Something went wrong");
       setStatus("sent");
-      reset();
+      reset({ consent: undefined, type: defaultType });
     } catch (e) {
       setServerError(e instanceof Error ? e.message : "Something went wrong");
       setStatus("error");

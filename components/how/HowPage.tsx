@@ -109,13 +109,13 @@ export function HowPage() {
       <section className="bg-surface-alt pb-24">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
           <Reveal y={40}>
-            <div className="relative isolate overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#ff7a1f] via-brand-orange to-[#e84c00] px-8 py-12 text-center text-white sm:px-12">
-              <div className="pointer-events-none absolute inset-0 -z-10 opacity-25 [background-image:radial-gradient(rgb(255_255_255/0.5)_1.2px,transparent_1.2px)] [background-size:1.375rem_1.375rem]" aria-hidden="true" />
+            <div className="relative isolate overflow-hidden rounded-[2rem] soft-panel px-8 py-12 text-center sm:px-12">
+              <div className="pointer-events-none absolute inset-0 -z-10 soft-panel-dots" aria-hidden="true" />
               <h2 className="text-3xl font-extrabold sm:text-4xl">Start your first free meal today</h2>
-              <p className="mx-auto mt-3 max-w-xl text-white/90">Download Miles Assist, finish your KYC and your first month is on us.</p>
+              <p className="mx-auto mt-3 max-w-xl text-body">Download Miles Assist, finish your KYC and your first month is on us.</p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
                 <StoreBadges />
-                <Link href="/pricing" className="group inline-flex items-center gap-2 rounded-full bg-white/15 px-6 py-3.5 text-sm font-extrabold ring-1 ring-white/40 backdrop-blur transition hover:bg-white hover:text-brand-orange">
+                <Link href="/pricing" className="group inline-flex items-center gap-2 rounded-full border-2 border-brand-orange/60 px-6 py-3 text-sm font-extrabold text-brand-orange transition hover:bg-brand-orange hover:text-white">
                   See pricing <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>

@@ -1,5 +1,5 @@
 /**
- * Detailed street scene for the "Get the App" banner (viewBox 640 x 460, drawn for the orange card).
+ * Detailed street scene for the "Get the App" banner (viewBox 640 x 460, drawn for the soft themed card; sky colours come from --as-* in globals.css).
  * Story on an 8s loop: the car drives in, stops at the partner restaurant, a cashback coin pops up,
  * then it drives on past the partner hotel. Pure SVG + CSS (classes "as-*" in app/hero-scene.css).
  */
@@ -70,29 +70,29 @@ export function AppStreetScene({ className }: { className?: string }) {
             <line key={i} x1="0" y1="-38" x2="0" y2="-50" transform={`rotate(${i * 30})`} />
           ))}
         </g>
-        <circle r="26" fill="#fff6dc" />
+        <circle r="26" style={{ fill: "var(--as-sun)" }} />
       </g>
 
       {/* birds */}
-      <g className="as-birds" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" opacity="0.8">
+      <g className="as-birds" fill="none" strokeWidth="2.2" strokeLinecap="round" opacity="0.8" style={{ stroke: "var(--as-bird)" }}>
         <path d="M120 70q6-7 12 0q6-7 12 0" className="as-flap" />
         <path d="M150 52q5-6 10 0q5-6 10 0" className="as-flap" style={{ animationDelay: "-0.3s" }} />
         <path d="M96 48q4-5 8 0q4-5 8 0" className="as-flap" style={{ animationDelay: "-0.6s" }} />
       </g>
 
       {/* clouds */}
-      <g className="hs-drift" style={{ ["--dur" as string]: "22s" }} fill="#fff">
+      <g className="hs-drift" style={{ ["--dur" as string]: "22s", fill: "var(--as-cloud)" }}>
         <g opacity="0.95"><ellipse cx="300" cy="112" rx="52" ry="15" /><circle cx="282" cy="102" r="18" /><circle cx="308" cy="92" r="23" /><circle cx="332" cy="104" r="15" /></g>
       </g>
-      <g className="hs-drift" style={{ ["--dur" as string]: "30s", ["--dd" as string]: "-9s" }} fill="#fff" opacity="0.7">
+      <g className="hs-drift" style={{ ["--dur" as string]: "30s", ["--dd" as string]: "-9s", fill: "var(--as-cloud)" }} opacity="0.7">
         <ellipse cx="460" cy="150" rx="36" ry="10" /><circle cx="448" cy="143" r="13" /><circle cx="468" cy="137" r="16" />
       </g>
 
       {/* far skyline with window dots */}
-      <g fill="#fff" opacity="0.16">
+      <g opacity="0.16" style={{ fill: "var(--as-skyline)" }}>
         {SKY.map(([x, h, w], i) => <rect key={i} x={x} y={372 - h} width={w} height={h} rx="3" />)}
       </g>
-      <g fill="#fff" opacity="0.22">
+      <g opacity="0.22" style={{ fill: "var(--as-skyline)" }}>
         {SKY.map(([x, h, w], i) =>
           Array.from({ length: Math.floor((h - 24) / 22) }, (_, r) => (
             <g key={`${i}-${r}`}>

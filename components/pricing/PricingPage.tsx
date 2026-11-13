@@ -49,6 +49,14 @@ function PlanReceipt() {
           <span className="text-[0.65rem] font-semibold text-muted">#MA-DRIVER</span>
         </div>
         <div className="my-4 border-t-2 border-dashed border-line" />
+        <div className="flex items-end justify-between gap-3">
+          <span>
+            <span className="block text-xs font-bold uppercase tracking-wider text-muted">First month</span>
+            <span className="free-word block text-6xl font-extrabold leading-none tracking-tight">FREE</span>
+          </span>
+          <span className="pp-stamp mb-1 rounded-md border-2 border-emerald-500 px-2.5 py-1 text-lg font-extrabold tracking-wider text-emerald-500">₹0</span>
+        </div>
+        <div className="my-4 border-t-2 border-dashed border-line" />
         <ul className="space-y-2.5">
           {lines.map((l, i) => (
             <li key={l.t} className="pp-line flex items-center justify-between text-sm" style={{ animationDelay: `${0.3 + i * 0.15}s` }}>
@@ -58,20 +66,17 @@ function PlanReceipt() {
           ))}
         </ul>
         <div className="my-4 border-t-2 border-dashed border-line" />
-        <div className="flex items-center justify-between text-sm">
-          <span className="font-semibold text-muted">First month</span>
-          <span className="pp-stamp rounded-md border-2 border-emerald-500 px-2 py-0.5 text-xs font-extrabold uppercase tracking-wider text-emerald-500">Free</span>
-        </div>
         <BillingProvider>
-          <div className="mt-4 flex justify-center"><BillingSwitch /></div>
-          <div className="mt-4 flex items-end justify-between gap-3">
-            <span className="text-sm font-semibold text-muted">Then</span>
-            <BillingAmount className="text-4xl font-extrabold tabular-nums text-heading" unitClassName="mb-1 text-sm font-bold text-muted" />
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <span className="text-xs font-bold uppercase tracking-wider text-muted">After the free month</span>
+            <BillingSwitch size="sm" />
           </div>
-          <p className="mt-1 min-h-[2rem] text-right text-xs font-semibold text-brand-orange"><BillingNote /></p>
+          <div className="mt-3 flex items-end justify-end">
+            <BillingAmount className="text-2xl font-extrabold tabular-nums text-heading" unitClassName="mb-0.5 text-xs font-bold text-muted" />
+          </div>
+          <p className="mt-1 min-h-[2rem] text-right text-xs font-semibold text-muted"><BillingNote /></p>
         </BillingProvider>
       </div>
-      <span className="pp-tag absolute -right-4 -top-4 rotate-12 rounded-2xl bg-gradient-to-br from-brand-orange to-[#ff8a3d] px-3.5 py-2 text-sm font-extrabold text-white shadow-glow">1 month free</span>
     </PlayOnView>
   );
 }
@@ -92,13 +97,17 @@ function PricingHero() {
           </Reveal>
           <Reveal delay={0.06}><span className={`${eyebrow} mt-6`}><Sparkles className="size-3.5" /> Simple pricing</span></Reveal>
           <Reveal delay={0.12}>
-            <h1 id="pp-title" className="mt-5 text-[2.6rem] font-extrabold leading-[1.05] tracking-tight text-heading sm:text-6xl">
-              One plan. First month free. <span className="text-brand-orange">Then ₹{plan.price}/month.</span> <span className="block text-[0.55em] leading-tight text-heading">Or ₹{yearly}/year, 2 months free.</span>
+            <h1 id="pp-title" className="font-extrabold tracking-tight text-heading">
+              <span className="mt-5 block text-3xl leading-tight sm:text-4xl">Your first month is</span>
+              <span className="free-word block text-[6rem] leading-[0.95] sm:text-[9rem]">FREE</span>
             </h1>
+            <p className="mt-3 text-lg font-bold text-heading sm:text-xl">
+              Then ₹{plan.price}/month, or ₹{yearly}/year <span className="whitespace-nowrap rounded-full bg-emerald-500 px-2.5 py-0.5 text-sm font-extrabold text-white">2 months free</span>
+            </p>
           </Reveal>
           <Reveal delay={0.18}>
             <p className="mt-5 max-w-xl text-lg text-body">
-              Free food, free stay, cashback on every verified bill, roadside assistance and 24/7 support, for about ₹{perDay} a day. Pay monthly, or pay ₹{yearly} for the whole year and save ₹{billing.yearlySaving}. Same plan either way: you level up as you drive.
+              Free food, free stay, cashback on every verified bill, roadside assistance and 24/7 support. Pay nothing for the first month after your KYC is verified. After that it is about ₹{perDay} a day, and you level up as you drive.
             </p>
           </Reveal>
           <Reveal delay={0.24}>
@@ -301,10 +310,10 @@ function PricingCta() {
     <section className="bg-surface-alt pb-24">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <Reveal y={40}>
-          <div className="relative isolate overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#ff7a1f] via-brand-orange to-[#e84c00] px-8 py-12 text-center text-white sm:px-12">
-            <div className="pointer-events-none absolute inset-0 -z-10 opacity-25 [background-image:radial-gradient(rgb(255_255_255/0.5)_1.2px,transparent_1.2px)] [background-size:1.375rem_1.375rem]" aria-hidden="true" />
+          <div className="relative isolate overflow-hidden rounded-[2rem] soft-panel px-8 py-12 text-center sm:px-12">
+            <div className="pointer-events-none absolute inset-0 -z-10 soft-panel-dots" aria-hidden="true" />
             <h2 className="text-3xl font-extrabold sm:text-4xl">Start your free month today</h2>
-            <p className="mx-auto mt-3 max-w-xl text-white/90">Download Miles Assist, complete your KYC, and pay nothing for your first month.</p>
+            <p className="mx-auto mt-3 max-w-xl text-body">Download Miles Assist, complete your KYC, and pay nothing for your first month.</p>
             <div className="mt-8 flex justify-center"><StoreBadges /></div>
           </div>
         </Reveal>

@@ -23,10 +23,10 @@ function Food() {
   return (
     <Card color="#ff5a00">
       <Head Icon={Utensils} title="Highway Dhaba" sub="NH 48 · 3.2 km ahead" color="#ff5a00" />
-      <div className="mt-4 rounded-2xl bg-gradient-to-br from-[#ff7a1f] to-[#e84c00] p-4 text-white">
-        <p className="text-[0.65rem] font-bold uppercase tracking-widest text-white/80">For Miles drivers</p>
+      <div className="soft-panel mt-4 rounded-2xl p-4">
+        <p className="text-[0.65rem] font-bold uppercase tracking-widest text-brand-orange">For Miles drivers</p>
         <p className="mt-1 text-xl font-extrabold">Free meal on duty</p>
-        <p className="text-xs text-white/85">Show your Miles Assist app at the counter</p>
+        <p className="text-xs text-body">Show your Miles Assist app at the counter</p>
         <span className="sv-steam absolute right-6 top-24 text-3xl" aria-hidden="true">🍛</span>
       </div>
       <div className="mt-3 space-y-2">

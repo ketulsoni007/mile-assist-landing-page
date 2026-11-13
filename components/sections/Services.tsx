@@ -32,7 +32,7 @@ export function Services() {
           </Reveal>
           <Reveal delay={0.16}>
             <p className="mt-5 text-lg text-body">
-              From free food and stay for drivers to new footfall for partners and instant savings for customers, Miles Assist keeps everyone connected on the road.
+              From free food and stay for drivers to new guests for hotels and restaurants, Miles Assist keeps everyone connected on the road.
             </p>
           </Reveal>
         </div>
