@@ -1,72 +1,94 @@
 import Image from "next/image";
-import { Play, Zap } from "lucide-react";
+import { Check } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { StoreBadges } from "@/components/ui/StoreBadges";
 import { heroAvatars } from "@/lib/content";
+import { heroCopy, type HeroCopy } from "@/lib/hero";
 import { Reveal } from "@/components/motion/Reveal";
 import { HeroShowcase } from "@/components/svg/HeroShowcase";
 import { HeroVisual } from "@/components/svg/HeroVisual";
 import { HeroBackground } from "@/components/effects/HeroBackground";
 
+function HeroText({ copy }: { copy: HeroCopy }) {
+  const { eyebrow, title, text, primary, secondary, extra, trust } = copy;
+  return (
+    <div data-role-only={copy.show}>
+      <Reveal>
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-orange-soft px-3 py-1 text-xs font-bold text-brand-orange ring-1 ring-brand-orange/15">
+          <eyebrow.Icon className="size-3.5 fill-brand-orange" /> {eyebrow.text}
+        </span>
+      </Reveal>
+      <Reveal delay={0.1}>
+        <h1 className="mt-5 text-[2.3rem] font-extrabold leading-[1.05] tracking-tight text-heading sm:text-6xl">
+          {title[0]}
+          <span className="block text-brand-orange">{title[1]}</span>
+          {title[2]}
+        </h1>
+      </Reveal>
+      <Reveal delay={0.2}>
+        <p className="mt-5 max-w-md text-lg text-body">{text}</p>
+      </Reveal>
+      <Reveal delay={0.3} className="mt-8 flex flex-wrap items-center gap-4">
+        <Button href={primary.href} size="lg">{primary.label}</Button>
+        <Button href={secondary.href} variant="ghost" size="lg">
+          <span className="grid size-9 place-items-center rounded-full bg-card shadow-card">
+            <secondary.Icon className="size-4 fill-brand-orange text-brand-orange" />
+          </span>
+          {secondary.label}
+        </Button>
+      </Reveal>
+      <Reveal delay={0.35} className="mt-6">
+        {extra === "stores" ? (
+          <StoreBadges size="sm" />
+        ) : (
+          <ul className="flex flex-col gap-2.5 text-[0.95rem] font-semibold text-heading">
+            {extra.map((t) => (
+              <li key={t} className="flex items-center gap-2.5">
+                <span className="grid size-5 shrink-0 place-items-center rounded-full bg-emerald-500 text-white"><Check className="size-3" strokeWidth={3.2} /></span>
+                {t}
+              </li>
+            ))}
+          </ul>
+        )}
+      </Reveal>
+      <Reveal delay={0.45} className="mt-7 flex items-center gap-3 text-sm">
+        <span className="flex shrink-0 items-center -space-x-3" aria-hidden="true">
+          {heroAvatars.map((n) => (
+            <Image
+              key={n}
+              src={`/users/avatar-${n}.webp`}
+              alt=""
+              width={44}
+              height={44}
+              className="size-11 rounded-full border-[3px] border-surface object-cover shadow-card transition-transform duration-300 hover:z-10 hover:-translate-y-1 hover:scale-110"
+            />
+          ))}
+          <span className="relative grid size-11 place-items-center rounded-full border-[3px] border-surface bg-brand-orange text-xs font-extrabold text-white shadow-card">+</span>
+        </span>
+        <span className="text-body">
+          {trust.lead} <strong className="text-heading">{trust.strong}</strong>{trust.tail ? ` ${trust.tail}` : ""}
+        </span>
+      </Reveal>
+    </div>
+  );
+}
+
 export function Hero() {
   return (
     <section
       id="top"
-      aria-labelledby="hero-title"
+      aria-label="Miles Assist"
       className="relative isolate overflow-hidden bg-gradient-to-b from-hero-a via-hero-b to-hero-c pb-12 pt-28 lg:pb-16 lg:pt-32"
     >
       {/* interactive liquid background: swirls with the cursor, fades out towards the bottom */}
       <HeroBackground className="-z-10 [mask-image:linear-gradient(to_bottom,#000_60%,transparent)]" />
 
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-5 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-0 lg:px-8">
+        {/* one copy block per role; CSS shows the right one before first paint (data-role-only, see globals.css) */}
         <div className="max-w-xl">
-          <Reveal>
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-orange-soft px-3 py-1 text-xs font-bold text-brand-orange ring-1 ring-brand-orange/15">
-              <Zap className="size-3.5 fill-brand-orange" /> Your Trusted Travel Companion
-            </span>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <h1 id="hero-title" className="mt-5 text-[2.3rem] font-extrabold leading-[1.05] tracking-tight text-heading sm:text-6xl">
-              Smart Driver
-              <span className="block text-brand-orange">Collaboration</span>
-              &amp; Travel Assistance
-            </h1>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <p className="mt-5 max-w-md text-lg text-body">
-              Everything you need for a safer, smoother and more rewarding journey, all in one place.
-            </p>
-          </Reveal>
-          <Reveal delay={0.3} className="mt-8 flex flex-wrap items-center gap-4">
-            <Button href="#download" size="lg">Start Your Journey</Button>
-            <Button href="#how-it-works" variant="ghost" size="lg">
-              <span className="grid size-9 place-items-center rounded-full bg-card shadow-card">
-                <Play className="size-4 fill-brand-orange text-brand-orange" />
-              </span>
-              Watch Video
-            </Button>
-          </Reveal>
-          <Reveal delay={0.35} className="mt-6">
-            <StoreBadges size="sm" />
-          </Reveal>
-          <Reveal delay={0.45} className="mt-7 flex items-center gap-3 text-sm">
-            <span className="flex items-center -space-x-3" aria-hidden="true">
-              {heroAvatars.map((n) => (
-                <Image
-                  key={n}
-                  src={`/users/avatar-${n}.webp`}
-                  alt=""
-                  width={44}
-                  height={44}
-                  className="size-11 rounded-full border-[3px] border-surface object-cover shadow-card transition-transform duration-300 hover:z-10 hover:-translate-y-1 hover:scale-110"
-                />
-              ))}
-              <span className="relative grid size-11 place-items-center rounded-full border-[3px] border-surface bg-brand-orange text-xs font-extrabold text-white shadow-card">+</span>
-            </span>
-            <span className="text-body">
-              Trusted by <strong className="text-heading">55,000+ Drivers</strong>
-            </span>
-          </Reveal>
+          {heroCopy.map((c) => (
+            <HeroText key={c.id} copy={c} />
+          ))}
         </div>
 
         {/* visual: lives in the same container as the text, so both scale together on any screen */}

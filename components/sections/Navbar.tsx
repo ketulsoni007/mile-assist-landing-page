@@ -9,6 +9,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { RoleButton } from "@/components/role/RoleButton";
 import { cn } from "@/lib/utils";
 
 
@@ -43,7 +44,7 @@ export function Navbar() {
           <LogoHorizontal className="h-11 w-auto lg:h-12" />
         </Link>
 
-        <ul className="hidden items-center gap-1 lg:flex">
+        <ul className="hidden items-center gap-1 xl:flex">
           {mainNav.map((l) => {
             const active = isActive(l.href);
             return (
@@ -52,7 +53,7 @@ export function Navbar() {
                   href={l.href}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "relative block rounded-full px-4 py-2 text-sm font-semibold transition-colors",
+                    "relative block whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold transition-colors",
                     active ? "text-brand-orange" : "text-heading hover:text-brand-orange",
                   )}
                 >
@@ -66,13 +67,14 @@ export function Navbar() {
           })}
         </ul>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-3 xl:flex">
           <ThemeToggle />
-          <Button href={ctaNav.partner.href} variant="outline" size="sm">{ctaNav.partner.label}</Button>
-          <Button href={ctaNav.contact.href} size="sm">{ctaNav.contact.label}</Button>
+          <RoleButton />
+          <Button href={ctaNav.partner.href} variant="outline" size="sm" className="whitespace-nowrap">{ctaNav.partner.label}</Button>
+          <Button href={ctaNav.contact.href} size="sm" className="whitespace-nowrap">{ctaNav.contact.label}</Button>
         </div>
 
-        <div className="flex items-center gap-2 lg:hidden">
+        <div className="flex items-center gap-2 xl:hidden">
         <ThemeToggle />
         <button
           type="button"
@@ -92,7 +94,7 @@ export function Navbar() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="overflow-hidden bg-surface/95 backdrop-blur-xl lg:hidden"
+            className="overflow-hidden bg-surface/95 backdrop-blur-xl xl:hidden"
           >
             <ul className="flex flex-col gap-1 px-5 pb-6 pt-2">
               {mainNav.map((l) => (
@@ -107,6 +109,9 @@ export function Navbar() {
                   </Link>
                 </li>
               ))}
+              <li className="mt-3">
+                <RoleButton variant="row" onOpen={() => setOpen(false)} />
+              </li>
               <li className="mt-3 flex gap-3">
                 <Button href={ctaNav.partner.href} variant="outline" size="sm" className="flex-1">{ctaNav.partner.label}</Button>
                 <Button href={ctaNav.contact.href} size="sm" className="flex-1">{ctaNav.contact.label}</Button>

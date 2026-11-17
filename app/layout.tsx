@@ -6,6 +6,8 @@ import { MotionProvider } from "@/components/motion/MotionProvider";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { FloatingContact } from "@/components/ui/FloatingContact";
+import { RoleModal } from "@/components/role/RoleModal";
+import { ROLE_SCRIPT } from "@/lib/role-script";
 import { site, organizationJsonLd, websiteJsonLd, appJsonLd, jsonLdString } from "@/lib/seo";
 
 const THEME_SCRIPT = `(function(){try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.setAttribute("data-theme",t)}catch(e){}})()`;
@@ -60,6 +62,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <head>
         {/* sets the saved (or system) theme before first paint, so there is no light-to-dark flash */}
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+        {/* copies the saved visitor role onto <html data-role> before first paint (see lib/role.ts) */}
+        <script dangerouslySetInnerHTML={{ __html: ROLE_SCRIPT }} />
       </head>
       <body className="min-h-screen overflow-x-clip">
         <script
@@ -72,6 +76,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             {children}
             <Footer />
             <FloatingContact />
+            <RoleModal />
           </SmoothScroll>
         </MotionProvider>
       </body>

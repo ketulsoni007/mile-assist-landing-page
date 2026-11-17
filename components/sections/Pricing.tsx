@@ -58,7 +58,7 @@ function TierCard({ tier, index }: { tier: Tier; index: number }) {
 
 export function Pricing() {
   return (
-    <section id="pricing" aria-labelledby="pricing-title" className="relative isolate overflow-hidden bg-gradient-to-b from-surface to-surface-alt py-24 sm:py-28">
+    <section id="pricing" data-role-only="driver default" aria-labelledby="pricing-title" className="relative isolate overflow-hidden bg-gradient-to-b from-surface to-surface-alt py-24 sm:py-28">
       <div className="pointer-events-none absolute left-1/2 top-24 -z-10 size-[40rem] -translate-x-1/2 rounded-full bg-brand-orange/10 blur-3xl" aria-hidden="true" />
       <div className="pointer-events-none absolute -right-24 bottom-10 -z-10 size-[26rem] rounded-full bg-[#f2c14e]/15 blur-3xl" aria-hidden="true" />
       {/* floating coins */}

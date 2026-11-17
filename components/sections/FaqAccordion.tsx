@@ -3,17 +3,17 @@
 import { useId, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Plus } from "lucide-react";
-import { faqs } from "@/lib/faq";
+import type { Faq } from "@/lib/faq";
 import { cn } from "@/lib/utils";
 
 /** Accordion: one item open at a time, smooth height animation, keyboard + screen-reader friendly. */
-export function FaqAccordion() {
+export function FaqAccordion({ items }: { items: Faq[] }) {
   const [open, setOpen] = useState<number | null>(0);
   const base = useId();
 
   return (
     <ul className="space-y-4">
-      {faqs.map((f, i) => {
+      {items.map((f, i) => {
         const isOpen = open === i;
         const btn = `${base}-b${i}`;
         const panel = `${base}-p${i}`;

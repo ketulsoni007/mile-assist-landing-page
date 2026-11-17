@@ -1,3 +1,4 @@
+import { PARTNER_ROLES, partnerWhy } from "@/lib/role-content";
 import { ArrowRight, TrendingUp } from "lucide-react";
 import CountUp from "@/components/react-bits/CountUp";
 import { Reveal } from "@/components/motion/Reveal";
@@ -26,7 +27,12 @@ export function WhyUs() {
             </h2>
           </Reveal>
           <Reveal delay={0.16}>
-            <p className="mt-4 max-w-sm text-lg text-body">A growing network built on free food, free stay and cashback for every driver on duty.</p>
+            <p className="mt-4 max-w-sm text-lg text-body">
+              <span data-role-only="driver default">A growing network built on free food, free stay and cashback for every driver on duty.</span>
+              {PARTNER_ROLES.map((r) => (
+                <span key={r} data-role-only={r}>{partnerWhy[r]}</span>
+              ))}
+            </p>
           </Reveal>
           <Reveal delay={0.24} className="mt-8">
             <Button href="#how-it-works" size="md">

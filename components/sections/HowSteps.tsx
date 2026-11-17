@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, useMotionValue, useMotionValueEvent, useReducedMotion, useScroll, useTransform, type MotionValue } from "motion/react";
 import { Check } from "lucide-react";
 import { steps, type Step } from "@/lib/content";
+import { PARTNER_ROLES, partnerHow } from "@/lib/role-content";
 
 /* ───────────── road geometry (viewBox 1000 x 540; badges sit ON the road) ───────────── */
 const VB_W = 1000;
@@ -55,7 +56,12 @@ function Badge({ step, progress, threshold }: { step: Step; progress: MotionValu
         className="relative grid size-20 place-items-center rounded-full text-white"
       >
         <motion.span animate={reached ? { scale: [1, 1.3, 1], rotate: [0, -10, 0] } : {}} transition={{ duration: 0.55 }} className="hw-float" style={{ ["--fd" as string]: `${n * -0.9}s` }}>
-          <Icon className="size-9" strokeWidth={1.8} />
+          {/* icon per visitor role (data-role-only, see globals.css) */}
+          <span data-role-only="driver default" className="contents"><Icon className="size-9" strokeWidth={1.8} /></span>
+          {PARTNER_ROLES.map((r) => {
+            const RoleIcon = partnerHow[r].steps[n - 1].Icon;
+            return <span key={r} data-role-only={r} className="contents"><RoleIcon className="size-9" strokeWidth={1.8} /></span>;
+          })}
         </motion.span>
         <span className="absolute -right-1 -top-1 grid size-8 place-items-center rounded-full border-2 border-surface bg-card text-sm font-extrabold shadow-card" style={{ color }}>{n}</span>
         <motion.span
@@ -77,8 +83,13 @@ function StepText({ step, progress, threshold, left }: { step: Step; progress: M
   const y = useTransform(lit, [0, 1], [12, 0]);
   return (
     <motion.div style={{ opacity, y }} className={left ? "text-left" : "text-center"}>
-      <h3 className="text-xl font-extrabold tracking-tight text-heading">{step.title}</h3>
-      <p className={`mt-1.5 max-w-[15rem] text-[0.95rem] leading-relaxed text-muted ${left ? "" : "mx-auto"}`}>{step.text}</p>
+      {/* wording per visitor role (data-role-only, see globals.css) */}
+      {[{ show: "driver default", title: step.title, text: step.text }, ...PARTNER_ROLES.map((r) => ({ show: r as string, ...partnerHow[r].steps[step.n - 1] }))].map((v) => (
+        <div key={v.show} data-role-only={v.show}>
+          <h3 className="text-xl font-extrabold tracking-tight text-heading">{v.title}</h3>
+          <p className={`mt-1.5 max-w-[15rem] text-[0.95rem] leading-relaxed text-muted ${left ? "" : "mx-auto"}`}>{v.text}</p>
+        </div>
+      ))}
     </motion.div>
   );
 }

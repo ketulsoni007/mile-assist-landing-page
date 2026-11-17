@@ -2,6 +2,7 @@ import { CircleHelp, Headset, MessageCircleQuestion } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 import { Button } from "@/components/ui/Button";
 import { faqs } from "@/lib/faq";
+import { PARTNER_ROLES, partnerFaqs } from "@/lib/role-content";
 import { jsonLdString } from "@/lib/seo";
 import { FaqAccordion } from "./FaqAccordion";
 
@@ -61,7 +62,13 @@ export function Faq() {
         </div>
 
         {/* right: accordion */}
-        <FaqAccordion />
+{/* one list per visitor role (data-role-only, see globals.css) */}
+        <div>
+          <div data-role-only="driver default"><FaqAccordion items={faqs} /></div>
+          {PARTNER_ROLES.map((r) => (
+            <div key={r} data-role-only={r}><FaqAccordion items={partnerFaqs[r]} /></div>
+          ))}
+        </div>
       </div>
     </section>
   );

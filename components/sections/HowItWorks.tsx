@@ -1,3 +1,4 @@
+import { PARTNER_ROLES, partnerHow } from "@/lib/role-content";
 import { Route } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 import { HowSteps } from "./HowSteps";
@@ -38,7 +39,12 @@ export function HowItWorks() {
             </h2>
           </Reveal>
           <Reveal delay={0.16}>
-            <p className="mt-4 text-lg text-body">Four easy steps from sign-up to cashback.</p>
+            <p className="mt-4 text-lg text-body">
+              <span data-role-only="driver default">Four easy steps from sign-up to cashback.</span>
+              {PARTNER_ROLES.map((r) => (
+                <span key={r} data-role-only={r}>{partnerHow[r].subtitle}</span>
+              ))}
+            </p>
           </Reveal>
         </div>
 

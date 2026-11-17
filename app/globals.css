@@ -217,3 +217,31 @@ html.theme-switching *::after {
 }
 @keyframes free-shine { from { background-position: 125% 0; } to { background-position: -125% 0; } }
 @media (prefers-reduced-motion: reduce) { .free-word { animation: none; background-position: 50% 0; } }
+
+/* ───────── role-based content ─────────
+   <div data-role-only="driver"> is shown only to that role (space-separate several roles).
+   Add the word "default" to also show it before a role is picked: data-role-only="driver hotel default".
+   Without "default" the block stays hidden until its role is picked. The role is on <html data-role> (lib/role.ts). */
+html:not([data-role]) [data-role-only]:not([data-role-only~="default"]),
+html[data-role="driver"] [data-role-only]:not([data-role-only~="driver"]),
+html[data-role="restaurant"] [data-role-only]:not([data-role-only~="restaurant"]),
+html[data-role="hotel"] [data-role-only]:not([data-role-only~="hotel"]) { display: none !important; }
+
+/* role popup art: gentle float */
+.rm-art { animation: rm-float 5s ease-in-out infinite; }
+.rm-guide { animation: rm-float 6s ease-in-out infinite; transform-origin: bottom center; }
+@keyframes rm-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-0.3rem); } }
+@media (prefers-reduced-motion: reduce) { .rm-art, .rm-guide { animation: none; } }
+
+/* role popup open / close */
+.rm-overlay { animation: rm-fade 0.25s ease both; }
+.rm-overlay[data-closing] { animation: rm-fade-out 0.2s ease both; pointer-events: none; }
+.rm-panel { animation: rm-pop 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.rm-overlay[data-closing] .rm-panel { animation: rm-pop-out 0.2s ease both; }
+.rm-card { animation: rm-rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes rm-fade { from { opacity: 0; } }
+@keyframes rm-fade-out { to { opacity: 0; } }
+@keyframes rm-pop { from { opacity: 0; transform: translateY(1.75rem) scale(0.96); } }
+@keyframes rm-pop-out { to { opacity: 0; transform: translateY(0.75rem) scale(0.98); } }
+@keyframes rm-rise { from { opacity: 0; transform: translateY(1.1rem); } }
+@media (prefers-reduced-motion: reduce) { .rm-overlay, .rm-panel, .rm-card { animation-duration: 0.01s !important; animation-delay: 0s !important; } }

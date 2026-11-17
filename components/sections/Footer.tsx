@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { RoleSwitch } from "@/components/role/RoleSwitch";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { LogoHorizontal } from "@/components/brand/LogoHorizontal";
 import { StoreBadges } from "@/components/ui/StoreBadges";
@@ -148,6 +149,7 @@ export function Footer() {
           <p>
             © <FooterYear /> {site.name}. All rights reserved.
           </p>
+          <RoleSwitch />
           <p className="flex items-center gap-1.5">
             Made with <span className="ft-heart inline-block text-brand-orange">♥</span> for drivers in India
           </p>

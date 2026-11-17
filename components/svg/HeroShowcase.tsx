@@ -1,8 +1,11 @@
 import { BadgeCheck, Bell, BatteryFull, Car, Headset, Hotel, LocateFixed, Minus, Mic, Navigation, Plus, Receipt, Search, ShieldCheck, Signal, Utensils, Wallet, Wifi, type LucideIcon } from "lucide-react";
+import { partnerChips, partnerRoles } from "@/lib/hero";
 import { LogoHorizontal } from "@/components/brand/LogoHorizontal";
 import { HeroScenery } from "./HeroScenery";
 import { PhoneMap } from "./PhoneMap";
 import { SearchTyper } from "./SearchTyper";
+import { RestaurantScreen } from "./RestaurantScreen";
+import { HotelScreen } from "./HotelScreen";
 
 /**
  * Hero visual: an app-phone mockup (live map, search, tab bar) inside an animated dashed ring, with the service
@@ -99,6 +102,8 @@ export function HeroShowcase({ className }: { className?: string }) {
                     </span>
                   </div>
 
+                  {/* screen body per visitor role (data-role-only, see globals.css): driver map, restaurant dashboard or hotel dashboard */}
+                  <div data-role-only="driver default" className="contents">
                   <p className="mt-[1.1cqw] px-[1.8cqw] text-[max(8px,1.2cqw)] font-extrabold leading-tight">
                     Good Morning, Driver <span className="hs-wave inline-block">👋</span>
                   </p>
@@ -143,6 +148,13 @@ export function HeroShowcase({ className }: { className?: string }) {
                       </span>
                     ))}
                   </div>
+                  </div>
+                  <div data-role-only="restaurant" className="contents">
+                    <RestaurantScreen />
+                  </div>
+                  <div data-role-only="hotel" className="contents">
+                    <HotelScreen />
+                  </div>
                 </div>
               </div>
             </div>
@@ -161,11 +173,24 @@ export function HeroShowcase({ className }: { className?: string }) {
                   <div className="hs-float" style={{ ["--fd" as string]: `${i * -1.3}s`, ["--fr" as string]: `${5.5 + (i % 3) * 0.8}s` }}>
                     <div className="flex items-center gap-[1cqw] rounded-[1.8cqw] border border-white/80 bg-white/75 px-[1.3cqw] py-[0.95cqw] shadow-card backdrop-blur-md dark:border-white/15 dark:bg-white/10">
                       <span className="grid size-[3.4cqw] shrink-0 place-items-center rounded-[1.1cqw] text-white shadow-md" style={{ background: `linear-gradient(135deg, ${color}, color-mix(in srgb, ${color} 65%, #fff))` }}>
-                        <Icon className="size-[1.9cqw]" />
+                        <span data-role-only="driver default" className="contents"><Icon className="size-[1.9cqw]" /></span>
+                        {partnerRoles.map((r) => {
+                          const RoleIcon = partnerChips[r][i].Icon;
+                          return <span key={r} data-role-only={r} className="contents"><RoleIcon className="size-[1.9cqw]" /></span>;
+                        })}
                       </span>
                       <span className="leading-tight">
-                        <span className="block whitespace-nowrap text-[max(9px,1.4cqw)] font-extrabold text-heading">{label}</span>
-                        <span className="block whitespace-nowrap text-[max(7px,0.95cqw)] font-medium text-muted">{sub}</span>
+                        {/* wording per visitor role (data-role-only, see globals.css) */}
+                        <span data-role-only="driver default" className="block">
+                          <span className="block whitespace-nowrap text-[max(9px,1.4cqw)] font-extrabold text-heading">{label}</span>
+                          <span className="block whitespace-nowrap text-[max(7px,0.95cqw)] font-medium text-muted">{sub}</span>
+                        </span>
+                        {partnerRoles.map((r) => (
+                          <span key={r} data-role-only={r} className="block">
+                            <span className="block whitespace-nowrap text-[max(9px,1.4cqw)] font-extrabold text-heading">{partnerChips[r][i].label}</span>
+                            <span className="block whitespace-nowrap text-[max(7px,0.95cqw)] font-medium text-muted">{partnerChips[r][i].sub}</span>
+                          </span>
+                        ))}
                       </span>
                     </div>
                   </div>
